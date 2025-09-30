@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts for branding */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+Devanagari:wght@300;400;500;700&display=swap');
+
+/* Accessibility-first base styles */
+@layer base {
+  * {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2;
+  }
+
+  html {
+    @apply text-accessible-base;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-neutral-white text-gray-900 antialiased font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    body {
+      @apply bg-white text-black;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Component utilities */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-primary-500 text-white rounded-lg font-semibold
+           hover:bg-primary-600 active:bg-primary-700
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+
+  .btn-accent {
+    @apply px-6 py-3 bg-accent-500 text-white rounded-lg font-semibold
+           hover:bg-accent-600 active:bg-accent-700
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transition-all duration-200 shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-neutral-light text-gray-900 rounded-lg font-semibold
+           hover:bg-gray-300 active:bg-gray-400
+           disabled:opacity-50 disabled:cursor-not-allowed
+           transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6 border border-gray-200
+           transition-shadow duration-200;
+  }
+
+  /* Skip to main content link for screen readers */
+  .skip-link {
+    @apply absolute left-0 top-0 bg-primary-500 text-white px-4 py-2 -translate-y-full
+           focus:translate-y-0 z-50;
+  }
+
+  /* Brand tagline */
+  .tagline {
+    @apply font-hindi text-sm text-gray-600 italic;
+  }
+
+  /* Voice interaction indicator */
+  .voice-active {
+    @apply animate-pulse ring-2 ring-accent-500 ring-offset-2;
+  }
+}

@@ -1,0 +1,8 @@
+# Icons Folder
+Place app icons here:
+- icon-192.png (192x192px)
+- icon-512.png (512x512px)
+- icon-1024.png (1024x1024px)
+- favicon.ico (optional)
+
+See ICON_REQUIREMENTS.md for design specifications.

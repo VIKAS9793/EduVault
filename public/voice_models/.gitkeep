@@ -1,0 +1,13 @@
+# Voice Models Folder
+Place offline voice models here (optional - for advanced offline voice):
+
+## ASR Models (Speech Recognition)
+- vosk-hi-model/ (Hindi Vosk model)
+- vosk-en-model/ (English Vosk model)
+
+## TTS Models (Text-to-Speech) 
+- indic-tts-hi/ (AI4Bharat Hindi TTS)
+- indic-tts-en/ (AI4Bharat English TTS)
+
+Note: Current implementation uses browser Web Speech API.
+These models are for enhanced offline capability in future versions.

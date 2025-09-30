@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3F51B5" />
+    <meta name="description" content="EduVault - ज्ञान की पहुंच, हर कोने तक | Offline-first multilingual educational platform with voice interaction and accessibility" />
+    
+    <!-- Security Headers via meta tags -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.ncert.gov.in https://diksha.gov.in; media-src 'self' blob:; worker-src 'self';" />
+    
+    <!-- PWA -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="icon" href="%PUBLIC_URL%/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192.png" />
+    
+    <!-- Accessibility -->
+    <meta name="color-scheme" content="light dark" />
+    
+    <title>EduVault - Offline Education Platform</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app. This application requires JavaScript for interactive learning features.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

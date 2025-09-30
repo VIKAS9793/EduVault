@@ -1,0 +1,111 @@
+# EduVault Project Rules
+
+## Project Description
+EduVault: Offline-first, government-aligned multilingual educational platform with voice interaction, quizzes, accessibility, and hybrid online/offline sync for inclusive learning across India.
+
+## Core Objectives
+- Reach every corner of India with offline-first design
+- Government-aligned content (NCERT/DIKSHA integration)
+- Multilingual accessibility (voice, TTS, haptic feedback)
+- Hybrid sync for seamless online/offline transitions
+- Low-resource optimization (<200MB, <2GB RAM devices)
+- Make in India initiative alignment
+
+## Tech Stack
+- **Frontend**: React 18.2 + TypeScript 5.3 + Tailwind CSS
+- **Offline Storage**: IndexedDB + Service Workers
+- **Voice**: Web Speech API (ASR/TTS)
+- **PWA**: Full offline capability
+- **Testing**: Jest + React Testing Library
+- **Deployment**: PWA + Android WebView (Capacitor)
+
+## Coding Standards (MANDATORY)
+- TypeScript strict mode with 100% type coverage
+- ESLint (Airbnb + TypeScript rules)
+- WCAG 2.1 AA accessibility compliance
+- SOLID, DRY, KISS, YAGNI principles
+- Comprehensive JSDoc documentation
+- Unit tests for all services/utilities
+- Security-first development
+
+## Architecture Patterns
+- Offline-first data strategy
+- Service-based architecture (dependency injection)
+- React hooks for state/effects
+- IndexedDB for persistent storage
+- Service Worker for caching
+- Singleton pattern for services
+
+## File Organization
+```
+src/
+├── components/     # React UI components
+├── services/       # Business logic services
+├── hooks/          # Custom React hooks
+├── utils/          # Utility functions
+├── types/          # TypeScript definitions
+└── __tests__/      # Test files
+```
+
+## Development Guidelines
+1. Always use async/await for promises
+2. Proper error handling with try-catch
+3. Accessibility: ARIA labels, keyboard navigation, screen reader support
+4. Performance: lazy loading, code splitting, memoization
+5. Security: input validation, CSP headers, no PII
+6. Privacy-first: local storage only, no trackers
+
+## Testing Requirements
+- Unit tests for all services
+- Component tests for UI
+- Accessibility tests (a11y)
+- Coverage threshold: 70%
+
+## Git Commit Convention
+- feat: New feature
+- fix: Bug fix
+- docs: Documentation
+- style: Formatting
+- refactor: Code restructuring
+- test: Tests
+- chore: Maintenance
+
+## Key Features
+✅ Offline-first architecture
+✅ Multilingual support (Hindi/English)
+✅ Voice interaction (ASR + TTS)
+✅ Interactive quizzes with feedback
+✅ Accessibility features (WCAG 2.1 AA)
+✅ Government API integration
+✅ PWA with Service Worker
+✅ Low-resource optimization
+✅ Hybrid sync capability
+
+## Dependencies
+- React, ReactDOM
+- idb (IndexedDB wrapper)
+- axios (HTTP client)
+- TypeScript
+- Tailwind CSS
+- Jest, Testing Library
+
+## Build Commands
+- `npm start` - Development server
+- `npm run build` - Production build
+- `npm test` - Run tests
+- `npm run verify` - Full verification (lint + type + test)
+- `npm run lint` - ESLint check
+- `npm run type-check` - TypeScript check
+
+## Deployment Targets
+1. PWA (Web browsers, installable)
+2. Android APK (via Capacitor)
+3. Offline distribution (USB/SD card)
+
+## Social Impact
+- Equitable education access
+- Rural/low-connectivity support
+- Disability inclusion
+- Multilingual learning
+- Government curriculum alignment
+- Atmanirbhar Bharat initiative

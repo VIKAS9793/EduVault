@@ -1,0 +1,99 @@
+[
+  {
+    "id": "lesson_001",
+    "title": "Photosynthesis",
+    "language": "hi",
+    "subject": "Science",
+    "grade": 6,
+    "audio_file": "lesson_content/audio/lesson_001_hi.mp3",
+    "text_content": "फोटोसिंथेसिस वह प्रक्रिया है जिसमें पौधे सूर्य की रोशनी का उपयोग करके भोजन बनाते हैं। इस प्रक्रिया में कार्बन डाइऑक्साइड और पानी का उपयोग होता है और ऑक्सीजन उत्पन्न होती है।",
+    "quiz": [
+      {
+        "question": "फोटोसिंथेसिस में कौन सी गैस प्रयोग होती है?",
+        "options": ["ऑक्सीजन", "कार्बन डाइऑक्साइड", "नाइट्रोजन"],
+        "answer": "कार्बन डाइऑक्साइड",
+        "explanation": "पौधे कार्बन डाइऑक्साइड को अवशोषित करते हैं और ऑक्सीजन छोड़ते हैं।"
+      },
+      {
+        "question": "फोटोसिंथेसिस के लिए किसकी आवश्यकता होती है?",
+        "options": ["सूर्य की रोशनी", "चंद्रमा की रोशनी", "अंधकार"],
+        "answer": "सूर्य की रोशनी",
+        "explanation": "सूर्य की ऊर्जा फोटोसिंथेसिस की प्रक्रिया को संचालित करती है।"
+      }
+    ]
+  },
+  {
+    "id": "lesson_001_en",
+    "title": "Photosynthesis",
+    "language": "en",
+    "subject": "Science",
+    "grade": 6,
+    "audio_file": "lesson_content/audio/lesson_001_en.mp3",
+    "text_content": "Photosynthesis is the process by which plants make food using sunlight. This process uses carbon dioxide and water, producing oxygen as a byproduct.",
+    "quiz": [
+      {
+        "question": "Which gas is used in photosynthesis?",
+        "options": ["Oxygen", "Carbon Dioxide", "Nitrogen"],
+        "answer": "Carbon Dioxide",
+        "explanation": "Plants absorb carbon dioxide and release oxygen during photosynthesis."
+      },
+      {
+        "question": "What is required for photosynthesis?",
+        "options": ["Sunlight", "Moonlight", "Darkness"],
+        "answer": "Sunlight",
+        "explanation": "Solar energy drives the photosynthesis process."
+      }
+    ]
+  },
+  {
+    "id": "lesson_002",
+    "title": "Indian Constitution",
+    "language": "hi",
+    "subject": "Civics",
+    "grade": 8,
+    "audio_file": "lesson_content/audio/lesson_002_hi.mp3",
+    "text_content": "भारतीय संविधान भारत का सर्वोच्च कानून है जो नागरिकों के मौलिक अधिकारों को निर्धारित करता है। यह 26 जनवरी 1950 को लागू हुआ था।",
+    "quiz": [
+      {
+        "question": "भारतीय संविधान कब लागू हुआ?",
+        "options": ["1947", "1950", "1962"],
+        "answer": "1950",
+        "explanation": "भारतीय संविधान 26 जनवरी 1950 को लागू हुआ, जिसे हम गणतंत्र दिवस के रूप में मनाते हैं।"
+      }
+    ]
+  },
+  {
+    "id": "lesson_002_en",
+    "title": "Indian Constitution",
+    "language": "en",
+    "subject": "Civics",
+    "grade": 8,
+    "audio_file": "lesson_content/audio/lesson_002_en.mp3",
+    "text_content": "The Indian Constitution is the supreme law of India that establishes fundamental rights for citizens. It came into effect on January 26, 1950.",
+    "quiz": [
+      {
+        "question": "When did the Indian Constitution come into effect?",
+        "options": ["1947", "1950", "1962"],
+        "answer": "1950",
+        "explanation": "The Indian Constitution came into effect on January 26, 1950, celebrated as Republic Day."
+      }
+    ]
+  },
+  {
+    "id": "lesson_003",
+    "title": "Pythagorean Theorem",
+    "language": "en",
+    "subject": "Mathematics",
+    "grade": 7,
+    "audio_file": "lesson_content/audio/lesson_003_en.mp3",
+    "text_content": "The Pythagorean theorem states that in a right triangle, the square of the hypotenuse equals the sum of squares of the other two sides: a² + b² = c²",
+    "quiz": [
+      {
+        "question": "If a=3 and b=4, what is c?",
+        "options": ["5", "6", "7"],
+        "answer": "5",
+        "explanation": "3² + 4² = 9 + 16 = 25, so c = √25 = 5"
+      }
+    ]
+  }
+]
