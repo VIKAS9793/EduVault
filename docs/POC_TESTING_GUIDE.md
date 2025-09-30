@@ -10,17 +10,17 @@
 ## 📸 **Visual Proof - Working POC**
 
 ### **English Interface**
-![EduVault POC - English Home](./public/assets/POC%20-1%20ENG.png)
+![EduVault POC - English Home](../public/assets/POC%20-1%20ENG.png)
 *EduVault POC running in English - Home screen with lesson cards*
 
-![EduVault POC - English Lesson Detail](./public/assets/POC%202-ENG.png)
+![EduVault POC - English Lesson Detail](../public/assets/POC%202-ENG.png)
 *EduVault POC - Lesson detail view with quiz section*
 
 ### **Hindi Interface (हिंदी)**
-![EduVault POC - Hindi Home](./public/assets/POC-1%20HINDI.png)
+![EduVault POC - Hindi Home](../public/assets/POC-1%20HINDI.png)
 *EduVault POC running in Hindi - Home screen with lesson cards*
 
-![EduVault POC - Hindi Lesson Detail](./public/assets/POC-2%20HINDI.png)
+![EduVault POC - Hindi Lesson Detail](../public/assets/POC-2%20HINDI.png)
 *EduVault POC - Lesson detail view with quiz section in Hindi*
 
 ### **What You'll See When Testing:**

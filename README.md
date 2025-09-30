@@ -446,10 +446,39 @@ MIT License - see LICENSE file for details
 - Web Speech API for voice capabilities
 - IndexedDB for offline storage
 
+## 📚 **Documentation**
+
+### **📖 Core Documentation**
+- **[Project Summary](docs/PROJECT_SUMMARY.md)** - Complete project overview, vision, and current status with visual proof
+- **[POC Testing Guide](docs/POC_TESTING_GUIDE.md)** - Step-by-step testing instructions for all features
+- **[POC Completion Status](docs/POC_COMPLETION_STATUS.md)** - Detailed status report of working features and capabilities
+- **[Deployment Guide](docs/DEPLOYMENT_GUIDE.md)** - Production deployment instructions and hosting options
+
+### **🎯 Product Management Documentation**
+- **[PRD (Product Requirements Document)](docs/PM%20CASE%20STUDIES/PRD.md)** - Complete product specifications and requirements
+- **[User Stories](docs/PM%20CASE%20STUDIES/USER_STORIES.md)** - Detailed user personas and use cases
+- **[Roadmap](docs/PM%20CASE%20STUDIES/ROADMAP.md)** - Future development plans and milestones
+- **[Competitive Analysis](docs/PM%20CASE%20STUDIES/COMPETITIVE_ANALYSIS.md)** - Market analysis and competitor comparison
+- **[Go-to-Market Strategy](docs/PM%20CASE%20STUDIES/GO_TO_MARKET.md)** - Launch strategy and market entry plan
+- **[Metrics & KPIs](docs/PM%20CASE%20STUDIES/METRICS_KPIs.md)** - Success metrics and performance indicators
+- **[Stakeholder Communication](docs/PM%20CASE%20STUDIES/STAKEHOLDER_COMMUNICATION.md)** - Communication templates and strategies
+- **[Release Notes](docs/PM%20CASE%20STUDIES/RELEASE_NOTES.md)** - Version history and feature updates
+
+### **🔧 Technical Documentation**
+- **[FAQ](docs/FAQ.md)** - Frequently asked questions and troubleshooting
+- **[Security Guide](docs/SECURITY.md)** - Security best practices and implementation
+- **[User Manual](docs/USER_MANUAL.md)** - End-user guide for using the application
+- **[Installation Guide](docs/INSTALLATION_COMPLETE.md)** - Complete setup and installation instructions
+
+### **📋 Quick Reference**
+- **For Developers**: Start with [Project Summary](docs/PROJECT_SUMMARY.md) → [Testing Guide](docs/POC_TESTING_GUIDE.md) → [Deployment Guide](docs/DEPLOYMENT_GUIDE.md)
+- **For Product Managers**: Start with [PRD](docs/PM%20CASE%20STUDIES/PRD.md) → [User Stories](docs/PM%20CASE%20STUDIES/USER_STORIES.md) → [Roadmap](docs/PM%20CASE%20STUDIES/ROADMAP.md)
+- **For Stakeholders**: Start with [Project Summary](docs/PROJECT_SUMMARY.md) → [POC Completion Status](docs/POC_COMPLETION_STATUS.md) → [Go-to-Market](docs/PM%20CASE%20STUDIES/GO_TO_MARKET.md)
+
 ## 📞 Support
 
 - **Issues**: GitHub Issues
-- **Documentation**: `/docs` directory
+- **Documentation**: `/docs` directory (see above for detailed guide)
 - **Community**: Discussions tab
 
 ---
