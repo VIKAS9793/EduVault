@@ -81,6 +81,23 @@
   },
   {
     "id": "lesson_003",
+    "title": "पाइथागोरस प्रमेय",
+    "language": "hi",
+    "subject": "Mathematics",
+    "grade": 7,
+    "audio_file": "lesson_content/audio/lesson_003_hi.mp3",
+    "text_content": "पाइथागोरस प्रमेय कहता है कि समकोण त्रिभुज में, कर्ण का वर्ग अन्य दो भुजाओं के वर्गों के योग के बराबर होता है: a² + b² = c²",
+    "quiz": [
+      {
+        "question": "यदि a=3 और b=4 है, तो c क्या होगा?",
+        "options": ["5", "6", "7"],
+        "answer": "5",
+        "explanation": "3² + 4² = 9 + 16 = 25, इसलिए c = √25 = 5"
+      }
+    ]
+  },
+  {
+    "id": "lesson_003_en",
     "title": "Pythagorean Theorem",
     "language": "en",
     "subject": "Mathematics",

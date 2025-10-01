@@ -1,7 +1,7 @@
 # Frequently Asked Questions (FAQ)
 ## EduVault Platform
 
-**Last Updated:** September 30, 2025  
+**Last Updated:** October 1, 2025  
 **Version:** 1.0  
 
 ---
@@ -735,11 +735,11 @@ EduVault is built by a passionate team of:
 **Twitter:** @EduVaultIndia  
 **Telegram:** t.me/eduvault  
 **Blog:** blog.eduvault.app  
-**Release Notes:** docs/RELEASE_NOTES.md  
+**Release Notes:** docs/PM CASE STUDIES/RELEASE_NOTES.md  
 
 ---
 
 **Still have questions?** Email us at support@eduvault.app!
 
-**Last Updated:** September 30, 2025  
+**Last Updated:** October 1, 2025  
 **Next Update:** Monthly

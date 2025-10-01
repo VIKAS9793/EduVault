@@ -3,7 +3,7 @@
 
 **Version:** 1.0  
 **Planning Horizon:** 2025-2027  
-**Last Updated:** September 30, 2025  
+**Last Updated:** October 1, 2025  
 
 ---
 

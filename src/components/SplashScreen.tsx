@@ -5,10 +5,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { ttsService } from '../services/TTSService';
+import type { Language } from '../types';
 
 interface SplashScreenProps {
   onComplete: () => void;
-  language: 'hi' | 'en';
+  language: Language;
 }
 
 export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language }) => {
@@ -74,7 +75,8 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language
         <p className="text-white/80 text-sm mt-6">Made in India 🇮🇳</p>
       </div>
 
-      <style>{`
+      <style>
+        {`
         @keyframes loading {
           0% {
             width: 0%;
@@ -89,7 +91,8 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete, language
             margin-left: 100%;
           }
         }
-      `}</style>
+      `}
+      </style>
     </div>
   );
 };

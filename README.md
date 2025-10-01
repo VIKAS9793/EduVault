@@ -10,23 +10,44 @@
 
 **🎉 POC COMPLETE & WORKING!** Enterprise-grade offline-first educational platform with multilingual voice interaction, accessibility features, and hybrid sync with government knowledge bases.
 
-## 📍 **Repository**
+## 📍 **Repository & Demo**
 
 **GitHub**: [https://github.com/VIKAS9793/EduVault](https://github.com/VIKAS9793/EduVault)  
 **Live Demo**: [http://localhost:3000](http://localhost:3000) (when running locally)
 
-## 🚀 **Current Status: POC LIVE & TESTING**
+## 🚀 **Quick Start**
 
-### ✅ **What's Working:**
-- **Full PWA Application** running at `http://localhost:3000`
-- **Professional Branding** with EduVault icons and Indian color scheme
-- **3 Preloaded Lessons** (Photosynthesis, Indian Constitution, Pythagorean Theorem)
+```bash
+# Clone and setup
+git clone https://github.com/VIKAS9793/EduVault.git
+cd EduVault
+npm install
+
+# Start development server
+npm start
+# Access at http://localhost:3000
+```
+
+## 📚 **Documentation**
+
+**Complete documentation is available in the [`docs/`](./docs/) folder:**
+
+- **[📖 Project Overview](./docs/PROJECT_SUMMARY.md)** - Complete project vision and technical details
+- **[🚀 Setup & Deployment](./docs/DEPLOYMENT_GUIDE.md)** - Installation and deployment guide
+- **[👥 User Manual](./docs/USER_MANUAL.md)** - Complete user guide
+- **[🧪 Testing Guide](./docs/TESTING_GUIDE.md)** - Testing procedures
+- **[❓ FAQ](./docs/FAQ.md)** - Frequently asked questions
+- **[📊 PM Documentation](./docs/PM%20CASE%20STUDIES/)** - Product management case studies
+
+## ✅ **Current Status: POC LIVE & WORKING**
+
+### **Key Features:**
+- **Full PWA Application** with offline capability
+- **Multilingual Support** (English ↔ Hindi)
 - **Voice Interaction** (Speech Recognition + Text-to-Speech)
 - **Interactive Quizzes** with instant feedback
-- **Language Switching** (English ↔ Hindi)
-- **Offline Capability** via Service Worker
-- **Accessibility Features** (ARIA, keyboard navigation, screen reader support)
-- **PWA Installation** ready for mobile/desktop
+- **Accessibility Features** (WCAG 2.1 AA compliant)
+- **Government Content Integration** (NCERT, DIKSHA, ePathshala)
 
 ## 📸 **Visual Proof - POC Screenshots**
 

@@ -4,8 +4,8 @@
 
 **Current Status**: ✅ **LIVE** at `http://localhost:3000`  
 **GitHub Repository**: [https://github.com/VIKAS9793/EduVault](https://github.com/VIKAS9793/EduVault)  
-**Last Updated**: September 30, 2025  
-**Version**: MVP 1.0.0  
+**Last Updated**: October 1, 2025  
+**Version**: MVP 2.0.0  
 
 ## 📸 **Visual Proof - Working POC**
 

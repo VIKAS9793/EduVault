@@ -2,7 +2,7 @@
 ## EduVault - Your Offline Learning Companion
 
 **Version:** 1.0  
-**Last Updated:** September 30, 2025  
+**Last Updated:** October 1, 2025  
 **Languages:** English | [हिंदी](#hindi-manual)  
 
 ---
@@ -612,8 +612,8 @@ We love hearing from users!
 
 - **User Manual**: (this document)
 - **FAQ**: docs/FAQ.md
-- **Release Notes**: docs/RELEASE_NOTES.md
-- **Deployment Guide**: docs/DEPLOYMENT.md
+- **Release Notes**: docs/PM CASE STUDIES/RELEASE_NOTES.md
+- **Deployment Guide**: docs/DEPLOYMENT_GUIDE.md
 
 ---
 
@@ -664,6 +664,6 @@ We love hearing from users!
 
 ---
 
-**Last Updated:** September 30, 2025  
+**Last Updated:** October 1, 2025  
 **Version:** 1.0  
-**For Updates:** Visit docs/RELEASE_NOTES.md
+**For Updates:** Visit docs/PM CASE STUDIES/RELEASE_NOTES.md

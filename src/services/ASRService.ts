@@ -7,7 +7,7 @@
 import type { IASRService, VoiceRecognitionResult, Language } from '../types';
 
 class ASRService implements IASRService {
-  private recognition: any | null = null;
+  private recognition: any = null;
 
   private isListening = false;
 
@@ -15,9 +15,8 @@ class ASRService implements IASRService {
 
   constructor() {
     // Check for browser support
-    const SpeechRecognitionAPI =
-      (window as any).SpeechRecognition ||
-      (window as any).webkitSpeechRecognition;
+    const SpeechRecognitionAPI = (window as any).SpeechRecognition
+      || (window as any).webkitSpeechRecognition;
 
     if (SpeechRecognitionAPI) {
       this.recognition = new SpeechRecognitionAPI();
@@ -37,8 +36,8 @@ class ASRService implements IASRService {
 
     this.recognition.onresult = (event: any) => {
       const result = event.results[event.results.length - 1];
-      const transcript = result[0].transcript;
-      const confidence = result[0].confidence;
+      const { transcript } = result[0];
+      const { confidence } = result[0];
 
       this.lastResult = {
         transcript,

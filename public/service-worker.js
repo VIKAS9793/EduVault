@@ -4,14 +4,24 @@
  * @version 1.0.0
  */
 
-const CACHE_NAME = 'eduvault-cache-v1';
-const RUNTIME_CACHE = 'eduvault-runtime-v1';
+const CACHE_NAME = 'eduvault-cache-v2';
+const RUNTIME_CACHE = 'eduvault-runtime-v2';
+const PRELOAD_CACHE = 'eduvault-preload-v2';
 
 // Static assets to cache on install
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/static/css/main.css',
+  '/static/js/main.js',
+  '/lesson_content/lessons.json',
+  '/lesson_content/real_lessons.json',
+  '/assets/banner.png',
+];
+
+// Critical resources to preload
+const PRELOAD_ASSETS = [
   '/static/css/main.css',
   '/static/js/main.js',
   '/lesson_content/lessons.json',

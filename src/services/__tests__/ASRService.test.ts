@@ -18,7 +18,7 @@ describe('ASRService', () => {
   it('should handle unsupported environment gracefully', async () => {
     if (!asrService.isSupported()) {
       await expect(asrService.startListening()).rejects.toThrow(
-        'Speech recognition not supported'
+        'Speech recognition not supported',
       );
     }
   });

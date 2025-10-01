@@ -1,28 +1,25 @@
 /**
- * EduVault Main Application Component
- * Orchestrates the entire application with offline-first architecture
+ * Enhanced EduVault Main Application Component
+ * Phase 2: Real Content Integration with advanced features
  */
 
-import React, {
-  useState,
-  useEffect,
-  Suspense,
-  lazy,
-} from 'react';
-import type { Lesson, Language, AppSettings } from './types';
+import React, { useState, useEffect } from 'react';
+import type {
+  Lesson, Language, AppSettings, ContentSyncStatus, QuizResult,
+} from './types';
 import { LanguageSelector } from './components/LanguageSelector';
 import { VoiceButton } from './components/VoiceButton';
 import { LessonList } from './components/LessonList';
+import { LessonDetail } from './components/LessonDetail';
 import { SplashScreen } from './components/SplashScreen';
-
+import { ContentSyncComponent } from './components/ContentSyncComponent';
+import { ContentSearchComponent } from './components/ContentSearchComponent';
+import { EnhancedQuizComponent } from './components/EnhancedQuizComponent';
 import { useOfflineDetection } from './hooks/useOfflineDetection';
 import { dbManager } from './utils/IndexedDBManager';
 import { enhancedLessonEngine } from './services/EnhancedLessonEngine';
 import { contentSyncService } from './services/ContentSyncService';
-import { PerformanceMonitor } from './components/PerformanceMonitor';
-
-// Lazy load heavy components for better performance
-const LessonDetail = lazy(() => import('./components/LessonDetail').then((module) => ({ default: module.LessonDetail })));
+// import { contentManager } from './services/ContentManager';
 
 const DEFAULT_SETTINGS: AppSettings = {
   language: 'en',
@@ -32,13 +29,17 @@ const DEFAULT_SETTINGS: AppSettings = {
   screenReaderMode: false,
 };
 
-const App: React.FC = () => {
+type AppView = 'lessons' | 'search' | 'sync' | 'lesson-detail' | 'quiz';
+
+const AppEnhanced: React.FC = () => {
   const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
+  const [currentView, setCurrentView] = useState<AppView>('lessons');
   const [isSyncing, setIsSyncing] = useState(false);
   const [initialized, setInitialized] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
-  const [showPerformanceMonitor, setShowPerformanceMonitor] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<ContentSyncStatus | null>(null);
+  const [quizResults, setQuizResults] = useState<QuizResult[]>([]);
   const [isOnline, wasOffline] = useOfflineDetection();
 
   // Initialize app
@@ -54,7 +55,7 @@ const App: React.FC = () => {
           setSettings(savedSettings);
         }
 
-        // Initialize enhanced lesson engine
+        // Initialize lesson engine
         await enhancedLessonEngine.init();
 
         setInitialized(true);
@@ -87,6 +88,43 @@ const App: React.FC = () => {
     } finally {
       setIsSyncing(false);
     }
+  };
+
+  // Handle content sync completion
+  const handleContentSyncComplete = (status: ContentSyncStatus): void => {
+    setSyncStatus(status);
+    // Refresh lesson list after sync
+    setCurrentView('lessons');
+  };
+
+  // Handle lesson selection
+  const handleLessonSelect = (lesson: Lesson): void => {
+    setSelectedLesson(lesson);
+    setCurrentView('lesson-detail');
+  };
+
+  // Handle quiz completion
+  const handleQuizComplete = (results: QuizResult[]): void => {
+    setQuizResults(results);
+    setCurrentView('lesson-detail');
+  };
+
+  // Navigation handlers
+  const navigateToLessons = (): void => {
+    setCurrentView('lessons');
+    setSelectedLesson(null);
+  };
+
+  const navigateToSearch = (): void => {
+    setCurrentView('search');
+  };
+
+  const navigateToSync = (): void => {
+    setCurrentView('sync');
+  };
+
+  const startQuiz = (): void => {
+    setCurrentView('quiz');
   };
 
   // Show splash screen on first load
@@ -170,6 +208,45 @@ const App: React.FC = () => {
             </div>
           </div>
 
+          {/* Navigation */}
+          <nav className="mt-4" aria-label="Main navigation">
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={navigateToLessons}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  currentView === 'lessons'
+                    ? 'bg-primary-500 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Lessons
+              </button>
+              <button
+                type="button"
+                onClick={navigateToSearch}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  currentView === 'search'
+                    ? 'bg-primary-500 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Search
+              </button>
+              <button
+                type="button"
+                onClick={navigateToSync}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  currentView === 'sync'
+                    ? 'bg-primary-500 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Sync Content
+              </button>
+            </div>
+          </nav>
+
           {/* Online/Offline Status */}
           <div className="mt-3">
             {!isOnline && (
@@ -214,27 +291,52 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {selectedLesson ? (
-          <Suspense
-            fallback={(
-              <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500" />
-                <span className="ml-3 text-gray-600">Loading lesson...</span>
-              </div>
-            )}
-          >
-            <LessonDetail
-              lesson={selectedLesson}
-              onBack={() => {
-                setSelectedLesson(null);
-              }}
-            />
-          </Suspense>
-        ) : (
+        {currentView === 'lessons' && (
           <LessonList
             selectedLanguage={settings.language}
-            onSelectLesson={setSelectedLesson}
+            onSelectLesson={handleLessonSelect}
           />
+        )}
+
+        {currentView === 'search' && (
+          <ContentSearchComponent onLessonSelect={handleLessonSelect} />
+        )}
+
+        {currentView === 'sync' && (
+          <ContentSyncComponent onSyncComplete={handleContentSyncComplete} />
+        )}
+
+        {currentView === 'lesson-detail' && selectedLesson && (
+          <LessonDetail
+            lesson={selectedLesson}
+            onBack={navigateToLessons}
+            onStartQuiz={startQuiz}
+            quizResults={quizResults}
+          />
+        )}
+
+        {currentView === 'quiz' && selectedLesson && (
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => setCurrentView('lesson-detail')}
+                className="btn-secondary"
+              >
+                ← Back to Lesson
+              </button>
+              <h2 className="text-2xl font-bold text-gray-900">
+                Quiz:
+                {' '}
+                {selectedLesson.title}
+              </h2>
+            </div>
+            <EnhancedQuizComponent
+              questions={selectedLesson.quiz}
+              lessonId={selectedLesson.id}
+              onComplete={handleQuizComplete}
+            />
+          </div>
         )}
       </main>
 
@@ -247,19 +349,22 @@ const App: React.FC = () => {
             <p className="text-gray-500 text-xs mt-2">
               Offline-first education platform • Made in India 🇮🇳
             </p>
+            {syncStatus && (
+              <p className="text-gray-500 text-xs mt-1">
+                Last sync:
+                {' '}
+                {syncStatus.syncedLessons}
+                {' '}
+                lessons from
+                {' '}
+                {syncStatus.source}
+              </p>
+            )}
           </div>
         </div>
       </footer>
-
-      {/* Performance Monitor (Development) */}
-      {process.env.NODE_ENV === 'development' && (
-        <PerformanceMonitor
-          isVisible={showPerformanceMonitor}
-          onToggle={() => setShowPerformanceMonitor(!showPerformanceMonitor)}
-        />
-      )}
     </div>
   );
 };
 
-export default App;
+export default AppEnhanced;

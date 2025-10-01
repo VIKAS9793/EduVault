@@ -6,7 +6,7 @@
 
 import axios, { AxiosError } from 'axios';
 import type { Lesson, APIResponse } from '../types';
-import { lessonEngine } from './LessonEngine';
+import { enhancedLessonEngine } from './EnhancedLessonEngine';
 
 // Security: Only allow approved government domains
 const APPROVED_GOV_APIS = ['https://api.ncert.gov.in', 'https://diksha.gov.in/api'] as const;
@@ -49,7 +49,7 @@ class GovContentFetcher {
     const lessons = await this.fetchLessons();
 
     if (lessons.length > 0) {
-      await lessonEngine.saveLessons(lessons);
+      await enhancedLessonEngine.saveLessons(lessons);
     }
 
     return lessons.length;
@@ -60,7 +60,7 @@ class GovContentFetcher {
    */
   private async makeRequest<T>(
     endpoint: string,
-    retries = 0
+    retries = 0,
   ): Promise<APIResponse<T>> {
     try {
       const response = await axios.get<APIResponse<T>>(`${this.config.baseURL}${endpoint}`, {
@@ -77,10 +77,10 @@ class GovContentFetcher {
 
       // Retry on network errors or 5xx responses
       if (
-        retries < this.config.maxRetries &&
-        (axiosError.code === 'ECONNABORTED' ||
-          axiosError.code === 'ERR_NETWORK' ||
-          (axiosError.response?.status ?? 0) >= 500)
+        retries < this.config.maxRetries
+        && (axiosError.code === 'ECONNABORTED'
+          || axiosError.code === 'ERR_NETWORK'
+          || (axiosError.response?.status ?? 0) >= 500)
       ) {
         // Exponential backoff
         await new Promise((resolve) => {

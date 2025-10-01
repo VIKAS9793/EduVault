@@ -205,7 +205,7 @@ Version history and release documentation:
 - **README.md** - Main project documentation
 - **USER_MANUAL.md** - End-user documentation
 - **FAQ.md** - Frequently asked questions
-- **DEPLOYMENT.md** - Technical deployment guide
+- **DEPLOYMENT_GUIDE.md** - Technical deployment guide
 - **SECURITY.md** - Security policies and procedures
 
 ---
@@ -243,7 +243,7 @@ For questions about PM documentation:
 
 ---
 
-**Last Updated**: September 30, 2025  
+**Last Updated**: October 1, 2025  
 **Document Count**: 8 core PM documents  
 **Total Pages**: ~3,500 words of comprehensive PM documentation  
 **Status**: Production-ready, actively maintained

@@ -3,10 +3,11 @@
  * Interactive quiz with accessibility features and progress tracking
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { QuizQuestion, UserProgress } from '../types';
 import { dbManager } from '../utils/IndexedDBManager';
 import { useAccessibility } from '../hooks/useAccessibility';
+import { ttsService } from '../services/TTSService';
 
 interface QuizComponentProps {
   questions: QuizQuestion[];
@@ -24,9 +25,14 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState<boolean[]>(
-    new Array(questions.length).fill(false)
+    new Array(questions.length).fill(false),
   );
   const { hapticFeedback, announceToScreenReader, readText } = useAccessibility();
+
+  // Cleanup audio when component unmounts
+  useEffect(() => () => {
+    ttsService.stop();
+  }, []);
 
   const currentQuestion = questions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
@@ -45,7 +51,7 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
       setScore(score + 1);
       announceToScreenReader('Correct!');
     } else {
-      announceToScreenReader(`Incorrect. The correct answer is ${currentQuestion.answer}`);
+      announceToScreenReader(`Incorrect. The correct answer is ${String(currentQuestion.answer)}`);
     }
 
     const newAnswered = [...answeredQuestions];
@@ -68,6 +74,10 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
       score: (score / questions.length) * 100,
       attempts: 1,
       lastAttemptDate: new Date().toISOString(),
+      timeSpent: 0,
+      quizResults: [],
+      bookmarks: [],
+      notes: [],
     };
 
     try {
@@ -78,11 +88,13 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
       console.error('Failed to save progress:', error);
     }
 
+    ttsService.stop(); // Stop audio before completing quiz
     onComplete();
   };
 
   const handleReadQuestion = (): void => {
-    const text = `${currentQuestion.question}. Options: ${currentQuestion.options.join(', ')}`;
+    const optionsText = Array.isArray(currentQuestion.options) ? currentQuestion.options.join(', ') : 'No options available';
+    const text = `${currentQuestion.question}. Options: ${optionsText}`;
     void readText(text);
   };
 
@@ -92,9 +104,18 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
       <div className="space-y-2">
         <div className="flex justify-between text-sm text-gray-600">
           <span>
-            Question {currentQuestionIndex + 1} of {questions.length}
+            Question
+            {' '}
+            {currentQuestionIndex + 1}
+            {' '}
+            of
+            {' '}
+            {questions.length}
           </span>
-          <span>Score: {score}</span>
+          <span>
+            Score:
+            {score}
+          </span>
         </div>
         <div
           className="w-full bg-gray-200 rounded-full h-2"
@@ -132,7 +153,7 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
 
         {/* Answer Options */}
         <div className="space-y-3" role="radiogroup" aria-label="Answer options">
-          {currentQuestion.options.map((option) => {
+          {currentQuestion.options?.map((option) => {
             const isSelected = selectedAnswer === option;
             const isCorrect = option === currentQuestion.answer;
             const showFeedback = showExplanation && isSelected;
@@ -213,7 +234,10 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
       <div className="flex justify-between">
         <button
           type="button"
-          onClick={onComplete}
+          onClick={() => {
+            ttsService.stop();
+            onComplete();
+          }}
           className="btn-secondary"
           aria-label="Exit quiz"
         >

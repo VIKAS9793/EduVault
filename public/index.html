@@ -17,6 +17,12 @@
     <link rel="icon" href="%PUBLIC_URL%/icons/icon-192.png" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192.png" />
     
+    <!-- Performance: Preload critical resources -->
+    <link rel="preload" href="%PUBLIC_URL%/lesson_content/lessons.json" as="fetch" crossorigin />
+    <link rel="preload" href="%PUBLIC_URL%/assets/banner.png" as="image" />
+    <link rel="dns-prefetch" href="https://api.ncert.gov.in" />
+    <link rel="dns-prefetch" href="https://diksha.gov.in" />
+    
     <!-- Accessibility -->
     <meta name="color-scheme" content="light dark" />
     

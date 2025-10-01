@@ -5,8 +5,9 @@
 
 import React, { useEffect, useState } from 'react';
 import type { Lesson, Language, Subject } from '../types';
-import { lessonEngine } from '../services/LessonEngine';
+import { enhancedLessonEngine } from '../services/EnhancedLessonEngine';
 import { useAccessibility } from '../hooks/useAccessibility';
+import { getTranslatedSubject, getAllSubjectsText } from '../utils/subjectTranslations';
 
 interface LessonListProps {
   selectedLanguage: Language;
@@ -26,7 +27,7 @@ export const LessonList: React.FC<LessonListProps> = ({
     const loadLessons = async (): Promise<void> => {
       try {
         setLoading(true);
-        const allLessons = await lessonEngine.getLessonsByLanguage(selectedLanguage);
+        const allLessons = await enhancedLessonEngine.getLessonsByLanguage(selectedLanguage);
         setLessons(allLessons);
         announceToScreenReader(`Loaded ${allLessons.length} lessons`);
       } catch (error) {
@@ -40,10 +41,9 @@ export const LessonList: React.FC<LessonListProps> = ({
     void loadLessons();
   }, [selectedLanguage, announceToScreenReader]);
 
-  const filteredLessons =
-    filterSubject === 'all'
-      ? lessons
-      : lessons.filter((lesson) => lesson.subject === filterSubject);
+  const filteredLessons = filterSubject === 'all'
+    ? lessons
+    : lessons.filter((lesson) => lesson.subject === filterSubject);
 
   const subjects = Array.from(new Set(lessons.map((l) => l.subject)));
 
@@ -72,7 +72,7 @@ export const LessonList: React.FC<LessonListProps> = ({
           }`}
           aria-pressed={filterSubject === 'all'}
         >
-          All Subjects
+          {getAllSubjectsText(selectedLanguage)}
         </button>
         {subjects.map((subject) => (
           <button
@@ -88,7 +88,7 @@ export const LessonList: React.FC<LessonListProps> = ({
             }`}
             aria-pressed={filterSubject === subject}
           >
-            {subject}
+            {getTranslatedSubject(subject, selectedLanguage)}
           </button>
         ))}
       </div>
@@ -115,15 +115,17 @@ export const LessonList: React.FC<LessonListProps> = ({
             }}
             role="button"
             tabIndex={0}
-            aria-label={`Lesson: ${lesson.title}, Subject: ${lesson.subject}, Grade: ${lesson.grade}`}
+            aria-label={`Lesson: ${lesson.title}, Subject: ${getTranslatedSubject(lesson.subject, selectedLanguage)}, Grade: ${lesson.grade}`}
           >
             <div className="flex items-start justify-between">
               <h3 className="text-lg font-bold text-gray-900">{lesson.title}</h3>
               <span className="px-2 py-1 bg-accent-100 text-accent-700 text-sm rounded font-medium">
-                Grade {lesson.grade}
+                Grade
+                {' '}
+                {lesson.grade}
               </span>
             </div>
-            <p className="text-primary-600 mt-2 font-medium">{lesson.subject}</p>
+            <p className="text-primary-600 mt-2 font-medium">{getTranslatedSubject(lesson.subject, selectedLanguage)}</p>
             <p className="text-gray-500 text-sm mt-2 line-clamp-2">{lesson.text_content}</p>
           </article>
         ))}

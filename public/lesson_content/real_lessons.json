@@ -1,0 +1,274 @@
+[
+  {
+    "id": "ncert_sci_6_1",
+    "title": "Food: Where Does It Come From?",
+    "description": "NCERT Science Class 6 - Chapter 1: Understanding food sources and nutrition",
+    "language": "en",
+    "subject": "Science",
+    "grade": 6,
+    "chapterId": "ncert_sci_6_ch1",
+    "order": 1,
+    "content": [
+      {
+        "id": "content_1",
+        "type": "text",
+        "content": "All living things need food to survive. Food provides us with energy and nutrients necessary for growth and development. Let's explore where our food comes from.",
+        "duration": 2
+      },
+      {
+        "id": "content_2",
+        "type": "text",
+        "content": "Plants are the primary source of food. They make their own food through the process of photosynthesis. Animals depend on plants directly or indirectly for their food.",
+        "duration": 3
+      },
+      {
+        "id": "content_3",
+        "type": "text",
+        "content": "Food sources can be classified into:\n1. Plant sources: Fruits, vegetables, grains, pulses\n2. Animal sources: Milk, eggs, meat, fish",
+        "duration": 4
+      },
+      {
+        "id": "content_4",
+        "type": "text",
+        "content": "Different parts of plants are used as food:\n- Roots: Carrot, radish, sweet potato\n- Stems: Potato, ginger, sugarcane\n- Leaves: Spinach, cabbage, lettuce\n- Flowers: Cauliflower, broccoli\n- Fruits: Apple, mango, banana\n- Seeds: Rice, wheat, pulses",
+        "duration": 5
+      }
+    ],
+    "audio_file": "lesson_content/audio/ncert_sci_6_1_en.mp3",
+    "text_content": "All living things need food to survive. Food provides us with energy and nutrients necessary for growth and development. Plants are the primary source of food. They make their own food through the process of photosynthesis. Animals depend on plants directly or indirectly for their food. Food sources can be classified into plant sources like fruits, vegetables, grains, pulses, and animal sources like milk, eggs, meat, fish. Different parts of plants are used as food including roots like carrot and radish, stems like potato and ginger, leaves like spinach and cabbage, flowers like cauliflower and broccoli, fruits like apple and mango, and seeds like rice and wheat.",
+    "quiz": [
+      {
+        "id": "quiz_1",
+        "question": "Which of the following is a plant source of food?",
+        "questionType": "multiple_choice",
+        "options": ["Rice", "Milk", "Eggs", "Meat"],
+        "answer": "Rice",
+        "explanation": "Rice is a grain that comes from plants, making it a plant source of food.",
+        "difficulty": "Beginner",
+        "points": 1,
+        "timeLimit": 30,
+        "hints": ["Think about what grows in fields", "It's a grain that we eat daily"]
+      },
+      {
+        "id": "quiz_2",
+        "question": "Name three parts of plants that we eat as food.",
+        "questionType": "short_answer",
+        "answer": "Roots, stems, leaves, flowers, fruits, seeds (any three)",
+        "explanation": "We eat various parts of plants including roots (carrot), stems (potato), leaves (spinach), flowers (cauliflower), fruits (apple), and seeds (rice).",
+        "difficulty": "Intermediate",
+        "points": 2,
+        "timeLimit": 60,
+        "hints": ["Consider different parts of plants", "Think about vegetables you eat"]
+      },
+      {
+        "id": "quiz_3",
+        "question": "Plants make their own food through photosynthesis.",
+        "questionType": "true_false",
+        "answer": "True",
+        "explanation": "Yes, plants use sunlight, carbon dioxide, and water to make their own food through the process of photosynthesis.",
+        "difficulty": "Beginner",
+        "points": 1,
+        "timeLimit": 20
+      }
+    ],
+    "duration": 15,
+    "difficulty": "Beginner",
+    "source": "NCERT",
+    "sourceUrl": "https://ncert.nic.in/textbook/pdf/fesc101.pdf",
+    "lastUpdated": "2024-01-15T00:00:00Z",
+    "version": "1.0.0",
+    "tags": ["science", "class-6", "chapter-1", "ncert", "government-approved", "food", "nutrition"],
+    "learningObjectives": [
+      "Understand the importance of food for living organisms",
+      "Identify different sources of food",
+      "Classify food into plant and animal sources",
+      "Recognize different parts of plants used as food"
+    ],
+    "prerequisites": [],
+    "keywords": ["food", "plants", "animals", "nutrition", "photosynthesis", "energy", "growth"],
+    "accessibility": {
+      "hasAudio": true,
+      "hasVideo": false,
+      "hasTranscript": true,
+      "hasSignLanguage": false,
+      "hasBraille": false
+    }
+  },
+  {
+    "id": "ncert_math_7_1",
+    "title": "Integers",
+    "description": "NCERT Mathematics Class 7 - Chapter 1: Understanding integers and their properties",
+    "language": "en",
+    "subject": "Mathematics",
+    "grade": 7,
+    "chapterId": "ncert_math_7_ch1",
+    "order": 1,
+    "content": [
+      {
+        "id": "content_1",
+        "type": "text",
+        "content": "Integers are whole numbers that can be positive, negative, or zero. They are represented on a number line where positive integers are to the right of zero and negative integers are to the left of zero.",
+        "duration": 3
+      },
+      {
+        "id": "content_2",
+        "type": "text",
+        "content": "Properties of integers:\n1. Closure property: Sum of two integers is always an integer\n2. Commutative property: a + b = b + a\n3. Associative property: (a + b) + c = a + (b + c)\n4. Additive identity: a + 0 = a\n5. Additive inverse: a + (-a) = 0",
+        "duration": 5
+      },
+      {
+        "id": "content_3",
+        "type": "text",
+        "content": "Operations with integers:\n- Addition: Same signs add, different signs subtract\n- Subtraction: Add the opposite\n- Multiplication: Same signs positive, different signs negative\n- Division: Same signs positive, different signs negative",
+        "duration": 4
+      }
+    ],
+    "audio_file": "lesson_content/audio/ncert_math_7_1_en.mp3",
+    "text_content": "Integers are whole numbers that can be positive, negative, or zero. They are represented on a number line where positive integers are to the right of zero and negative integers are to the left of zero. Integers have several important properties including closure property, commutative property, associative property, additive identity, and additive inverse. When performing operations with integers, we follow specific rules for addition, subtraction, multiplication, and division based on the signs of the numbers.",
+    "quiz": [
+      {
+        "id": "quiz_1",
+        "question": "What is the sum of -5 and 3?",
+        "questionType": "multiple_choice",
+        "options": ["-2", "-8", "2", "8"],
+        "answer": "-2",
+        "explanation": "When adding integers with different signs, we subtract and keep the sign of the larger absolute value. |5| > |3|, so the answer is negative: -5 + 3 = -2",
+        "difficulty": "Beginner",
+        "points": 1,
+        "timeLimit": 30,
+        "hints": ["Different signs, so subtract", "Keep the sign of the larger number"]
+      },
+      {
+        "id": "quiz_2",
+        "question": "Find the product of -4 and -6.",
+        "questionType": "short_answer",
+        "answer": "24",
+        "explanation": "When multiplying two negative numbers, the result is positive. -4 × -6 = 24",
+        "difficulty": "Intermediate",
+        "points": 2,
+        "timeLimit": 45,
+        "hints": ["Same signs give positive result", "Multiply the absolute values"]
+      },
+      {
+        "id": "quiz_3",
+        "question": "Which property states that a + b = b + a?",
+        "questionType": "multiple_choice",
+        "options": ["Associative", "Commutative", "Closure", "Identity"],
+        "answer": "Commutative",
+        "explanation": "The commutative property states that the order of addition does not change the result: a + b = b + a",
+        "difficulty": "Intermediate",
+        "points": 2,
+        "timeLimit": 40
+      }
+    ],
+    "duration": 12,
+    "difficulty": "Intermediate",
+    "source": "NCERT",
+    "sourceUrl": "https://ncert.nic.in/textbook/pdf/gemh101.pdf",
+    "lastUpdated": "2024-01-15T00:00:00Z",
+    "version": "1.0.0",
+    "tags": ["mathematics", "class-7", "chapter-1", "ncert", "government-approved", "integers", "number-line"],
+    "learningObjectives": [
+      "Understand the concept of integers",
+      "Learn properties of integers",
+      "Perform operations with integers",
+      "Apply integer rules in problem solving"
+    ],
+    "prerequisites": ["basic-arithmetic"],
+    "keywords": ["integers", "positive", "negative", "zero", "number-line", "properties", "operations"],
+    "accessibility": {
+      "hasAudio": true,
+      "hasVideo": false,
+      "hasTranscript": true,
+      "hasSignLanguage": false,
+      "hasBraille": false
+    }
+  },
+  {
+    "id": "ncert_civics_8_1",
+    "title": "The Indian Constitution",
+    "description": "NCERT Civics Class 8 - Chapter 1: Understanding the Indian Constitution and its significance",
+    "language": "en",
+    "subject": "Civics",
+    "grade": 8,
+    "chapterId": "ncert_civics_8_ch1",
+    "order": 1,
+    "content": [
+      {
+        "id": "content_1",
+        "type": "text",
+        "content": "The Indian Constitution is the supreme law of India that establishes fundamental rights for citizens. It came into effect on January 26, 1950, which we celebrate as Republic Day.",
+        "duration": 3
+      },
+      {
+        "id": "content_2",
+        "type": "text",
+        "content": "The Constitution was drafted by the Constituent Assembly under the leadership of Dr. B.R. Ambedkar. It took almost three years to complete and reflects the aspirations of the Indian people.",
+        "duration": 3
+      },
+      {
+        "id": "content_3",
+        "type": "text",
+        "content": "Key features of the Indian Constitution:\n1. Federal structure with unitary features\n2. Parliamentary form of government\n3. Fundamental rights and duties\n4. Directive principles of state policy\n5. Independent judiciary",
+        "duration": 4
+      }
+    ],
+    "audio_file": "lesson_content/audio/ncert_civics_8_1_en.mp3",
+    "text_content": "The Indian Constitution is the supreme law of India that establishes fundamental rights for citizens. It came into effect on January 26, 1950, which we celebrate as Republic Day. The Constitution was drafted by the Constituent Assembly under the leadership of Dr. B.R. Ambedkar. It took almost three years to complete and reflects the aspirations of the Indian people. The Constitution has key features including federal structure with unitary features, parliamentary form of government, fundamental rights and duties, directive principles of state policy, and independent judiciary.",
+    "quiz": [
+      {
+        "id": "quiz_1",
+        "question": "When did the Indian Constitution come into effect?",
+        "questionType": "multiple_choice",
+        "options": ["1947", "1950", "1962", "1949"],
+        "answer": "1950",
+        "explanation": "The Indian Constitution came into effect on January 26, 1950, celebrated as Republic Day.",
+        "difficulty": "Beginner",
+        "points": 1,
+        "timeLimit": 30
+      },
+      {
+        "id": "quiz_2",
+        "question": "Who was the chairman of the Drafting Committee of the Indian Constitution?",
+        "questionType": "short_answer",
+        "answer": "Dr. B.R. Ambedkar",
+        "explanation": "Dr. B.R. Ambedkar was the chairman of the Drafting Committee and is known as the Father of the Indian Constitution.",
+        "difficulty": "Intermediate",
+        "points": 2,
+        "timeLimit": 45
+      },
+      {
+        "id": "quiz_3",
+        "question": "The Indian Constitution has a federal structure with unitary features.",
+        "questionType": "true_false",
+        "answer": "True",
+        "explanation": "Yes, the Indian Constitution establishes a federal system but with strong central government powers, making it federal with unitary features.",
+        "difficulty": "Advanced",
+        "points": 3,
+        "timeLimit": 40
+      }
+    ],
+    "duration": 10,
+    "difficulty": "Intermediate",
+    "source": "NCERT",
+    "sourceUrl": "https://ncert.nic.in/textbook/pdf/hess101.pdf",
+    "lastUpdated": "2024-01-15T00:00:00Z",
+    "version": "1.0.0",
+    "tags": ["civics", "class-8", "chapter-1", "ncert", "government-approved", "constitution", "republic-day"],
+    "learningObjectives": [
+      "Understand the significance of the Indian Constitution",
+      "Learn about the making of the Constitution",
+      "Identify key features of the Constitution",
+      "Appreciate the role of constitutional principles in democracy"
+    ],
+    "prerequisites": ["basic-civics"],
+    "keywords": ["constitution", "republic-day", "fundamental-rights", "democracy", "ambedkar", "constituent-assembly"],
+    "accessibility": {
+      "hasAudio": true,
+      "hasVideo": false,
+      "hasTranscript": true,
+      "hasSignLanguage": false,
+      "hasBraille": false
+    }
+  }
+]

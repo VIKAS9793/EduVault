@@ -146,6 +146,14 @@ class IndexedDBManager {
     const tx = db.transaction(['lessons', 'progress', 'settings'], 'readwrite');
     await Promise.all([tx.objectStore('lessons').clear(), tx.objectStore('progress').clear(), tx.done]);
   }
+
+  /**
+   * Clear only lessons data (useful for reloading lesson content)
+   */
+  async clearLessons(): Promise<void> {
+    const db = await this.ensureDB();
+    await db.clear('lessons');
+  }
 }
 
 // Export singleton instance

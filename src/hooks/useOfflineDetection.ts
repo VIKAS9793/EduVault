@@ -5,12 +5,12 @@
 
 import { useState, useEffect } from 'react';
 
-interface OfflineStatus {
-  isOnline: boolean;
-  wasOffline: boolean;
-}
+// interface OfflineStatus {
+//   isOnline: boolean;
+//   wasOffline: boolean;
+// }
 
-export const useOfflineDetection = (): OfflineStatus => {
+export const useOfflineDetection = (): [boolean, boolean] => {
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [wasOffline, setWasOffline] = useState<boolean>(false);
 
@@ -37,5 +37,5 @@ export const useOfflineDetection = (): OfflineStatus => {
     };
   }, []);
 
-  return { isOnline, wasOffline };
+  return [isOnline, wasOffline];
 };

@@ -1,9 +1,50 @@
-# EduVault Deployment Guide
+# EduVault Setup & Deployment Guide
 
-## 🚀 **POC to Production Deployment**
+## 🚀 **Complete Setup to Production Deployment**
 
 **Current Status**: ✅ POC Complete & Working  
 **Ready for**: Production deployment and user testing  
+
+---
+
+## 📦 **Installation & Setup**
+
+### **Prerequisites**
+- **Node.js:** v18+ (Recommended: v22.19.0)
+- **npm:** v10+ (Recommended: v10.9.3)
+- **Git:** Latest version
+
+### **Environment Setup**
+```bash
+# Clone the repository
+git clone https://github.com/VIKAS9793/EduVault.git
+cd EduVault
+
+# Install dependencies
+npm install
+
+# Verify installation
+npm run type-check
+npm run lint
+npm test
+```
+
+### **Key Dependencies**
+- ✅ **react@18.2.0** - Frontend framework
+- ✅ **typescript@5.3.3** - Type safety
+- ✅ **tailwindcss@3.4.0** - Styling
+- ✅ **idb@7.1.1** - IndexedDB wrapper
+- ✅ **axios@1.6.2** - HTTP client
+- ✅ **workbox-window@7.0.0** - Service Worker
+
+### **Development Server**
+```bash
+# Start development server
+npm start
+
+# Access application
+# http://localhost:3000
+```
 
 ---
 

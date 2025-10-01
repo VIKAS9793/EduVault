@@ -414,10 +414,10 @@ Create content. Share knowledge. Empower millions.
 
 ## Contact & Resources
 
-- **Repository**: [GitHub Link]
-- **Demo**: [Live Demo URL]
-- **Documentation**: See README.md, DEPLOYMENT.md
-- **Security**: See SECURITY.md
+- **Repository**: [https://github.com/VIKAS9793/EduVault](https://github.com/VIKAS9793/EduVault)
+- **Demo**: [http://localhost:3000](http://localhost:3000) (when running locally)
+- **Documentation**: See docs/README.md, docs/DEPLOYMENT_GUIDE.md
+- **Security**: See docs/SECURITY.md
 - **License**: MIT (Open Source)
 
 ---
