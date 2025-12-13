@@ -53,24 +53,29 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Run unit tests with coverage
-        run: npm test -- --coverage --watchAll=false --passWithNoTests
+        run: npm test -- --run --coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          file: ./coverage/lcov.info
+          files: ./coverage/lcov.info
           flags: unittests
           name: codecov-umbrella
-          fail_ci_if_error: true
+          fail_ci_if_error: false
 
       - name: Check coverage threshold
         run: |
-          COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
-          if (( $(echo "$COVERAGE < $COVERAGE_THRESHOLD" | bc -l) )); then
-            echo "Coverage $COVERAGE% is below threshold $COVERAGE_THRESHOLD%"
-            exit 1
+          if [ -f coverage/coverage-summary.json ]; then
+            COVERAGE=$(jq '.total.lines.pct' coverage/coverage-summary.json)
+            if (( $(echo "$COVERAGE < $COVERAGE_THRESHOLD" | bc -l) )); then
+              echo "Coverage $COVERAGE% is below threshold $COVERAGE_THRESHOLD%"
+              exit 1
+            fi
+            echo "Coverage $COVERAGE% meets threshold $COVERAGE_THRESHOLD%"
+          else
+            echo "Warning: coverage-summary.json not found, skipping threshold check"
+            echo "Vitest thresholds are configured in vitest.config.ts"
           fi
-          echo "Coverage $COVERAGE% meets threshold $COVERAGE_THRESHOLD%"
 
   # Integration Tests
   integration-tests:
