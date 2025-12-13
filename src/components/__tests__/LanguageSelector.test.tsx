@@ -4,11 +4,12 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { vi, describe, it, expect } from 'vitest';
 import { LanguageSelector } from '../LanguageSelector';
 
 describe('LanguageSelector', () => {
   it('renders with current language', () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     render(<LanguageSelector currentLanguage="en" onLanguageChange={mockOnChange} />);
 
     const select = screen.getByLabelText('Select language');
@@ -17,7 +18,7 @@ describe('LanguageSelector', () => {
   });
 
   it('calls onLanguageChange when selection changes', () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     render(<LanguageSelector currentLanguage="en" onLanguageChange={mockOnChange} />);
 
     const select = screen.getByLabelText('Select language');
@@ -27,10 +28,11 @@ describe('LanguageSelector', () => {
   });
 
   it('displays both language options', () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
     render(<LanguageSelector currentLanguage="en" onLanguageChange={mockOnChange} />);
 
-    expect(screen.getByText('English')).toBeInTheDocument();
-    expect(screen.getByText('हिंदी (Hindi)')).toBeInTheDocument();
+    // Match exact text from component
+    expect(screen.getByText('🇮🇳 English')).toBeInTheDocument();
+    expect(screen.getByText('🇮🇳 हिंदी')).toBeInTheDocument();
   });
 });
