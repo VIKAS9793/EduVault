@@ -2,6 +2,7 @@
   "name": "eduvault-hybrid-mvp",
   "version": "1.0.0",
   "description": "Offline-first educational platform with multilingual voice interaction and accessibility",
+  "type": "module",
   "private": true,
   "scripts": {
     "start": "vite",
