@@ -7,7 +7,7 @@ import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
 // Jest compatibility shim for existing test files
-global.jest = vi;
+(global as any).jest = vi;
 
 // Mock IndexedDB with fake-indexeddb for deterministic testing
 const { indexedDB } = require('fake-indexeddb');
