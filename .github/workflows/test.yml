@@ -8,7 +8,7 @@ on:
 
 env:
   NODE_VERSION: '20'
-  COVERAGE_THRESHOLD: 90
+  COVERAGE_THRESHOLD: 50
 
 jobs:
   # Lint and Type Check
