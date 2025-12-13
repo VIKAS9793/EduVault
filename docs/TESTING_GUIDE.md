@@ -1,6 +1,8 @@
 # Production-Grade Testing Guide
 ## MAANG Standards for EduVault
 
+> **ℹ️ Testing Framework (v2.1.0):** As of Dec 2025, EduVault uses **Vitest** (Jest-compatible). All `jest.fn()`, `jest.mock()` syntax works via compatibility shim.
+
 ### **🚀 Quick Start Commands**
 
 ```bash

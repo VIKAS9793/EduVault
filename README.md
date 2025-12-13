@@ -2,8 +2,10 @@
 
 ![EduVault Project Banner](./public/assets/banner.png)
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-18.2-61dafb)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18.3-61dafb)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF)](https://vitejs.dev/)
+[![Vitest](https://img.shields.io/badge/Vitest-1.6-729B1B)](https://vitest.dev/)
 [![PWA](https://img.shields.io/badge/PWA-Ready-5a0fc8)](https://web.dev/progressive-web-apps/)
 [![WCAG 2.1](https://img.shields.io/badge/WCAG-2.1%20AA-green)](https://www.w3.org/WAI/WCAG21/quickref/)
 [![POC Status](https://img.shields.io/badge/POC-✅%20Working-brightgreen)](https://github.com/VIKAS9793/EduVault)
@@ -23,10 +25,13 @@ git clone https://github.com/VIKAS9793/EduVault.git
 cd EduVault
 npm install
 
-# Start development server
+# Start development server (Vite - lightning fast! ⚡)
 npm start
 # Access at http://localhost:3000
+# Hot Module Replacement: ~200ms (instant feedback)
 ```
+
+**⚠️ Note:** As of v2.1.0 (Dec 2025), EduVault has migrated from `react-scripts` to **Vite** for 10x faster builds and modern ESM tooling.
 
 ## 📚 **Documentation**
 
