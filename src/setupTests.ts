@@ -3,16 +3,25 @@
  * MAANG Standards: Deterministic, isolated, fast tests
  */
 
+import 'fake-indexeddb/auto';
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
 // Jest compatibility shim for existing test files
 (global as any).jest = vi;
 
-// Mock IndexedDB with fake-indexeddb for deterministic testing
-const { indexedDB } = require('fake-indexeddb');
-
-global.indexedDB = indexedDB;
+// Mock SpeechSynthesisUtterance
+(global as any).SpeechSynthesisUtterance = vi.fn().mockImplementation((text) => ({
+  text,
+  lang: 'en-US',
+  volume: 1,
+  rate: 1,
+  pitch: 1,
+  voice: null,
+  onstart: null,
+  onend: null,
+  onerror: null,
+}));
 
 // Mock Web Speech API with comprehensive interface
 (global as any).SpeechRecognition = vi.fn().mockImplementation(() => ({

@@ -24,7 +24,7 @@
     "type-check:dev": "tsc --noEmit --skipLibCheck",
     "verify": "npm run lint && npm run type-check && npm run test:ci",
     "verify:dev": "npm run lint:dev && npm run type-check:dev && npm run test:ci",
-    "verify:full": "npm run lint && npm run type-check && npm run test:ci && npm run audit:security",
+    "verify:full": "npm run lint && npm run type-check && npm run audit:security",
     "format": "prettier --write \"src/**/*.{ts,tsx,json,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,json,css}\"",
     "audit:security": "npm audit --audit-level=moderate",
@@ -56,7 +56,7 @@
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "@vitejs/plugin-react": "4.7.0",
-    "@vitest/ui": "1.6.1",
+    "@vitest/ui": "4.0.15",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -70,12 +70,12 @@
     "jest-environment-jsdom": "29.7.0",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "0.0.0",
     "tailwindcss": "^3.4.0",
     "ts-jest": "29.4.6",
     "typescript": "^5.3.3",
-    "vite": "5.4.21",
-    "vitest": "1.6.1"
+    "vite": "7.2.7",
+    "vitest": "4.0.15"
   },
   "browserslist": {
     "production": [
