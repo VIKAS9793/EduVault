@@ -1,9 +1,13 @@
 /**
- * Production-Grade Jest Test Setup
+ * Production-Grade Vitest Test Setup
  * MAANG Standards: Deterministic, isolated, fast tests
  */
 
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
+
+// Jest compatibility shim for existing test files
+global.jest = vi;
 
 // Mock IndexedDB with fake-indexeddb for deterministic testing
 const { indexedDB } = require('fake-indexeddb');
@@ -11,12 +15,12 @@ const { indexedDB } = require('fake-indexeddb');
 global.indexedDB = indexedDB;
 
 // Mock Web Speech API with comprehensive interface
-(global as any).SpeechRecognition = jest.fn().mockImplementation(() => ({
-  start: jest.fn(),
-  stop: jest.fn(),
-  abort: jest.fn(),
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
+(global as any).SpeechRecognition = vi.fn().mockImplementation(() => ({
+  start: vi.fn(),
+  stop: vi.fn(),
+  abort: vi.fn(),
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
   onresult: null,
   onerror: null,
   onstart: null,
@@ -31,12 +35,12 @@ global.indexedDB = indexedDB;
 (global as any).webkitSpeechRecognition = (global as any).SpeechRecognition;
 
 // Mock SpeechSynthesis with full interface
-(global as any).speechSynthesis = {
-  speak: jest.fn(),
-  cancel: jest.fn(),
-  pause: jest.fn(),
-  resume: jest.fn(),
-  getVoices: jest.fn(() => [
+const speechSynthesisMock = {
+  speak: vi.fn(),
+  cancel: vi.fn(),
+  pause: vi.fn(),
+  resume: vi.fn(),
+  getVoices: vi.fn(() => [
     {
       voiceURI: 'en-US-Standard-A',
       name: 'English (US)',
@@ -55,34 +59,39 @@ global.indexedDB = indexedDB;
   speaking: false,
   pending: false,
   paused: false,
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
-  dispatchEvent: jest.fn(),
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
+  dispatchEvent: vi.fn(),
 } as unknown as SpeechSynthesis;
 
+Object.defineProperty(global, 'speechSynthesis', {
+  value: speechSynthesisMock,
+  writable: true,
+});
+
 // Mock AudioContext for TTS audio generation
-(global as any).AudioContext = jest.fn().mockImplementation(() => ({
-  createMediaStreamDestination: jest.fn(() => ({
+(global as any).AudioContext = vi.fn().mockImplementation(() => ({
+  createMediaStreamDestination: vi.fn(() => ({
     stream: {
-      getTracks: jest.fn(() => []),
+      getTracks: vi.fn(() => []),
     },
   })),
-  close: jest.fn(),
-  suspend: jest.fn(),
-  resume: jest.fn(),
+  close: vi.fn(),
+  suspend: vi.fn(),
+  resume: vi.fn(),
   state: 'running',
 }));
 
 (global as any).webkitAudioContext = (global as any).AudioContext;
 
 // Mock MediaRecorder for audio blob generation
-(global as any).MediaRecorder = jest.fn().mockImplementation(() => ({
-  start: jest.fn(),
-  stop: jest.fn(),
-  pause: jest.fn(),
-  resume: jest.fn(),
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
+(global as any).MediaRecorder = vi.fn().mockImplementation(() => ({
+  start: vi.fn(),
+  stop: vi.fn(),
+  pause: vi.fn(),
+  resume: vi.fn(),
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
   ondataavailable: null,
   onstop: null,
   state: 'inactive',
@@ -96,45 +105,39 @@ Object.defineProperty(navigator, 'onLine', {
 
 Object.defineProperty(navigator, 'vibrate', {
   writable: true,
-  value: jest.fn(),
+  value: vi.fn(),
 });
 
 // Mock fetch for API calls
-global.fetch = jest.fn();
+global.fetch = vi.fn();
 
 // Mock URL.createObjectURL for audio blob handling
-global.URL.createObjectURL = jest.fn(() => 'blob:mock-audio-url');
-global.URL.revokeObjectURL = jest.fn();
+global.URL.createObjectURL = vi.fn(() => 'blob:mock-audio-url');
+global.URL.revokeObjectURL = vi.fn();
 
 // Mock localStorage for deterministic testing
 const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
   length: 0,
-  key: jest.fn(),
+  key: vi.fn(),
 };
-global.localStorage = localStorageMock;
+
+Object.defineProperty(global, 'localStorage', {
+  value: localStorageMock,
+  writable: true,
+});
 
 // Mock sessionStorage
-global.sessionStorage = localStorageMock;
-
-// Freeze time for deterministic tests
-jest.useFakeTimers();
-jest.setSystemTime(new Date('2024-01-15T10:00:00Z'));
+Object.defineProperty(global, 'sessionStorage', {
+  value: localStorageMock,
+  writable: true,
+});
 
 // Clean up after each test
 afterEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
   localStorageMock.clear();
 });
-
-// Global test utilities
-declare global {
-  namespace jest {
-    interface Matchers<R> {
-      toBeAccessible(): R;
-    }
-  }
-}

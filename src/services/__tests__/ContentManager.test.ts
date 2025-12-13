@@ -28,13 +28,9 @@ describe('ContentManager', () => {
     it('should_sync_ncert_content_successfully', async () => {
       // Arrange
       const mockNCERTContent: NCERTContent[] = [TestDataFactory.createNCERTContent()];
-      // const mockLesson = LessonFactory.createNCERTStyle();
 
-      // Mock fetch to return NCERT content
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockNCERTContent,
-      });
+      // Spy on private method fetchNCERTContent
+      jest.spyOn(contentManager as any, 'fetchNCERTContent').mockResolvedValue(mockNCERTContent);
 
       // Mock TTS service
       mockTTSService.generateAudioBlob.mockResolvedValueOnce(new Blob(['audio data']));
@@ -69,10 +65,7 @@ describe('ContentManager', () => {
       // Arrange
       const mockNCERTContent: NCERTContent[] = [TestDataFactory.createNCERTContent()];
 
-      (global.fetch as jest.Mock).mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockNCERTContent,
-      });
+      jest.spyOn(contentManager as any, 'fetchNCERTContent').mockResolvedValue(mockNCERTContent);
 
       // Mock lesson engine to fail
       mockLessonEngine.saveLesson.mockRejectedValueOnce(new Error('Save failed'));
@@ -99,7 +92,8 @@ describe('ContentManager', () => {
 
     it('should_handle_network_errors_during_fetch', async () => {
       // Arrange
-      (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Network error'));
+      // Spy on private method to throw error
+      jest.spyOn(contentManager as any, 'fetchNCERTContent').mockRejectedValue(new Error('Network error'));
 
       // Act & Assert
       await expect(contentManager.syncFromSource('NCERT'))

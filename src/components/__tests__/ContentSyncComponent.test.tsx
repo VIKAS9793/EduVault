@@ -3,7 +3,6 @@
  * MAANG Standards: Test behavior, not implementation
  */
 
-import React from 'react';
 import {
   render, screen, waitFor,
 } from '@testing-library/react';
@@ -170,7 +169,7 @@ describe('ContentSyncComponent', () => {
       mockContentManager.syncFromSource.mockRejectedValue(new Error('Network error'));
 
       // Mock window.alert
-      const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => {});
+      const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
       // Act
       render(<ContentSyncComponent onSyncComplete={mockOnSyncComplete} />);
@@ -199,7 +198,11 @@ describe('ContentSyncComponent', () => {
 
       // Make sync take some time
       mockContentManager.syncFromSource.mockImplementation(
-        () => new Promise((resolve) => setTimeout(() => resolve(mockSyncStatus), 100)),
+        () => new Promise<ContentSyncStatus>((resolve) => {
+          setTimeout(() => {
+            resolve(mockSyncStatus);
+          }, 100);
+        }),
       );
 
       // Act
@@ -219,7 +222,7 @@ describe('ContentSyncComponent', () => {
         useOfflineDetection: () => [false, false], // isOnline, wasOffline
       }));
 
-      const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => {});
+      const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
       // Act
       render(<ContentSyncComponent onSyncComplete={mockOnSyncComplete} />);
@@ -401,7 +404,7 @@ describe('ContentSyncComponent', () => {
       // Arrange
       mockContentManager.syncFromSource.mockRejectedValue(new Error('Network error'));
 
-      const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => {});
+      const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
       // Act
       render(<ContentSyncComponent onSyncComplete={mockOnSyncComplete} />);
@@ -421,7 +424,7 @@ describe('ContentSyncComponent', () => {
       // Arrange
       mockContentManager.syncFromSource.mockRejectedValue(new Error('Unknown error'));
 
-      const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => {});
+      const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
       // Act
       render(<ContentSyncComponent onSyncComplete={mockOnSyncComplete} />);

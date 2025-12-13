@@ -1,9 +1,10 @@
+/* Import Google Fonts - MUST be first in CSS */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+Devanagari:wght@300;400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Import Google Fonts for branding */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+Devanagari:wght@300;400;500;700&display=swap');
 
 /* Accessibility-first base styles */
 @layer base {

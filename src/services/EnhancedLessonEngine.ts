@@ -230,6 +230,7 @@ class EnhancedLessonEngine {
 
   // Private methods
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   private async loadLessonsFromDB(): Promise<Lesson[]> {
     this.stats.dbQueries++;
     const lessons = await dbManager.getAllLessons();
@@ -283,7 +284,7 @@ class EnhancedLessonEngine {
       }
 
       // Merge lessons using the lesson data merger
-      const mergedLessons = await lessonDataMerger.mergeLessons(realLessons, fallbackLessons);
+      const mergedLessons = lessonDataMerger.mergeLessons(realLessons, fallbackLessons);
 
       // Ensure equal lesson count across languages
       const balancedLessons = lessonDataMerger.ensureEqualLessonCount(mergedLessons);

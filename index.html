@@ -13,13 +13,13 @@
           content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.ncert.gov.in https://diksha.gov.in; media-src 'self' blob:; worker-src 'self';" />
     
     <!-- PWA -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="icon" href="%PUBLIC_URL%/icons/icon-192.png" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/icon-192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
     
     <!-- Performance: Preload critical resources -->
-    <link rel="preload" href="%PUBLIC_URL%/lesson_content/lessons.json" as="fetch" crossorigin />
-    <link rel="preload" href="%PUBLIC_URL%/assets/banner.png" as="image" />
+    <link rel="preload" href="/lesson_content/lessons.json" as="fetch" crossorigin />
+    <link rel="preload" href="/assets/banner.png" as="image" />
     <link rel="dns-prefetch" href="https://api.ncert.gov.in" />
     <link rel="dns-prefetch" href="https://diksha.gov.in" />
     
@@ -31,5 +31,6 @@
   <body>
     <noscript>You need to enable JavaScript to run this app. This application requires JavaScript for interactive learning features.</noscript>
     <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

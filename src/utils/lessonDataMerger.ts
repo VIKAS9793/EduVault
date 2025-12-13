@@ -24,9 +24,13 @@ class LessonDataMerger {
    * @param fallbackLessons - Lessons from lessons.json
    * @returns Merged lessons with equal content across languages
    */
-  async mergeLessons(realLessons: Lesson[], fallbackLessons: Lesson[]): Promise<Lesson[]> {
-    console.log(`Merging lessons: ${realLessons.length} real lessons, ${fallbackLessons.length} fallback lessons`);
-
+  /**
+   * Merge lessons from multiple sources
+   * @param realLessons - Lessons from real_lessons.json
+   * @param fallbackLessons - Lessons from lessons.json
+   * @returns Merged lessons with equal content across languages
+   */
+  mergeLessons(realLessons: Lesson[], fallbackLessons: Lesson[]): Lesson[] {
     // If we have real lessons, use them as base
     if (realLessons.length > 0) {
       const mergedLessons = [...realLessons];
@@ -37,12 +41,10 @@ class LessonDataMerger {
         mergedLessons.push(...missingLessons);
       }
 
-      console.log(`Merged lessons: ${mergedLessons.length} total lessons`);
       return mergedLessons;
     }
 
     // Fallback to lessons.json if no real lessons
-    console.log('No real lessons found, using fallback lessons');
     return fallbackLessons;
   }
 
@@ -66,7 +68,6 @@ class LessonDataMerger {
       }
     }
 
-    console.log(`Found ${missingLessons.length} missing lessons to add`);
     return missingLessons;
   }
 
@@ -84,9 +85,6 @@ class LessonDataMerger {
     // Find the language with the most lessons
     const maxCount = Math.max(...languages.map((lang) => lessonsByLanguage[lang].length));
 
-    console.log('Language lesson counts:', languages.map((lang) => `${lang}: ${lessonsByLanguage[lang].length}`));
-    console.log(`Target lesson count per language: ${maxCount}`);
-
     // Ensure all languages have the same number of lessons
     const balancedLessons: Lesson[] = [];
 
@@ -98,7 +96,6 @@ class LessonDataMerger {
         const needed = maxCount - languageLessons.length;
         const duplicatedLessons = this.duplicateLessons(languageLessons, needed);
         balancedLessons.push(...languageLessons, ...duplicatedLessons);
-        console.log(`Added ${needed} duplicated lessons for ${language}`);
       } else {
         balancedLessons.push(...languageLessons);
       }

@@ -13,12 +13,29 @@ describe('IndexedDBManager', () => {
   const testLesson: Lesson = {
     id: 'db-test-001',
     title: 'Database Test',
+    description: 'Test Description',
     language: 'en',
     subject: 'Mathematics',
     grade: 6,
+    chapterId: 'ch1',
+    order: 1,
+    content: [],
     audio_file: '/test.mp3',
     text_content: 'Test',
     quiz: [],
+    duration: 10,
+    difficulty: 'Beginner',
+    source: 'Custom',
+    lastUpdated: new Date().toISOString(),
+    version: '1.0',
+    tags: ['test'],
+    learningObjectives: ['test'],
+    keywords: ['test'],
+    accessibility: {
+      hasAudio: true,
+      hasVideo: false,
+      hasTranscript: true,
+    },
   };
 
   it('should initialize database', async () => {
@@ -39,6 +56,10 @@ describe('IndexedDBManager', () => {
       score: 95,
       attempts: 1,
       lastAttemptDate: new Date().toISOString(),
+      timeSpent: 10,
+      quizResults: [],
+      bookmarks: [],
+      notes: [],
     };
 
     await dbManager.saveProgress(progress);

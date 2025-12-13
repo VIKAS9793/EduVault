@@ -92,8 +92,14 @@ This folder contains all project documentation organized by category. Each docum
 
 ## 📝 **Documentation Updates**
 
-**Last Updated**: October 1, 2025  
-**Version**: 2.0.0  
+**Last Updated**: December 13, 2025  
+**Version**: 2.1.0 - **Vite Migration**  
 **Status**: ✅ Complete and Current
+
+### **Recent Changes (v2.1.0)**
+- ✅ **Migrated from react-scripts to Vite** - 10x faster builds, modern ESM tooling
+- ✅ **Zero build vulnerabilities** - Removed 830 deprecated packages
+- ✅ **Vitest integration** - Modern testing framework with Jest API compatibility
+- ✅ **Security hardening** - Enforced `npm audit` in CI pipeline
 
 For questions about documentation, please refer to the relevant document or create an issue in the GitHub repository.

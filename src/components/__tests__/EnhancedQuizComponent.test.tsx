@@ -3,7 +3,6 @@
  * MAANG Standards: Test behavior, not implementation
  */
 
-import React from 'react';
 import {
   render, screen, waitFor, act,
 } from '@testing-library/react';

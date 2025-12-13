@@ -88,7 +88,9 @@ class IndexedDBManager {
   async saveLessons(lessons: Lesson[]): Promise<void> {
     const db = await this.ensureDB();
     const tx = db.transaction('lessons', 'readwrite');
-    await Promise.all([...lessons.map((lesson) => tx.store.put(lesson)), tx.done]);
+    const promises = lessons.map((lesson) => tx.store.put(lesson));
+    // eslint-disable-next-line max-len
+    await Promise.all([...promises, tx.done]);
   }
 
   async getLesson(id: string): Promise<Lesson | undefined> {
