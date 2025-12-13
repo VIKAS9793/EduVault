@@ -3,7 +3,9 @@
  * MAANG Standards: Test behavior, not implementation
  */
 
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import {
+  vi, describe, it, expect, beforeEach,
+} from 'vitest';
 import type { TTSOptions } from '../../types';
 
 describe('TTSService', () => {
@@ -20,8 +22,12 @@ describe('TTSService', () => {
       pause: vi.fn(),
       resume: vi.fn(),
       getVoices: vi.fn().mockReturnValue([
-        { voiceURI: 'en-US-Standard-A', name: 'English (US)', lang: 'en-US', default: true, localService: true },
-        { voiceURI: 'hi-IN-Standard-A', name: 'Hindi (India)', lang: 'hi-IN', default: false, localService: true },
+        {
+          voiceURI: 'en-US-Standard-A', name: 'English (US)', lang: 'en-US', default: true, localService: true,
+        },
+        {
+          voiceURI: 'hi-IN-Standard-A', name: 'Hindi (India)', lang: 'hi-IN', default: false, localService: true,
+        },
       ]),
       pending: false,
       paused: false,
@@ -43,12 +49,19 @@ describe('TTSService', () => {
     // 2. Mock SpeechSynthesisUtterance
     class MockUtterance {
       text: string;
+
       lang = 'en-US';
+
       pitch = 1;
+
       rate = 1;
+
       volume = 1;
+
       onend: any = null;
+
       onerror: any = null;
+
       constructor(text: string) { this.text = text; }
     }
     (global as any).SpeechSynthesisUtterance = MockUtterance;
@@ -61,12 +74,17 @@ describe('TTSService', () => {
   describe('speak', () => {
     it('should_speak_text_successfully', async () => {
       const text = 'Hello world';
-      const options: Partial<TTSOptions> = { rate: 0.8, pitch: 1.2, volume: 0.9, lang: 'en' };
+      const options: Partial<TTSOptions> = {
+        rate: 0.8, pitch: 1.2, volume: 0.9, lang: 'en',
+      };
 
       // Simulate success
       speakSpy.mockImplementation((utterance: SpeechSynthesisUtterance) => {
         setTimeout(() => {
-          if (utterance.onend) utterance.onend(new Event('end') as any);
+          if (utterance.onend) {
+            const event = new Event('end') as unknown as SpeechSynthesisEvent;
+            utterance.onend(event);
+          }
         }, 0);
       });
 
@@ -81,7 +99,10 @@ describe('TTSService', () => {
     it('should_handle_speech_errors', async () => {
       speakSpy.mockImplementation((utterance: SpeechSynthesisUtterance) => {
         setTimeout(() => {
-          if (utterance.onerror) utterance.onerror({ error: 'synthesis-failed' } as any);
+          if (utterance.onerror) {
+            const event = { error: 'synthesis-failed' } as unknown as SpeechSynthesisErrorEvent;
+            utterance.onerror(event);
+          }
         }, 0);
       });
 

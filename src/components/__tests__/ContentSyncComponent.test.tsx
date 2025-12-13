@@ -5,7 +5,9 @@
 
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import {
+  vi, describe, it, expect, beforeEach,
+} from 'vitest';
 import { ContentSyncComponent } from '../ContentSyncComponent';
 import { contentManager } from '../../services/ContentManager';
 import type { ContentSyncStatus } from '../../types';

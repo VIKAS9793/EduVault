@@ -26,20 +26,35 @@ import { vi, beforeEach, afterEach } from 'vitest';
  */
 class MockSpeechSynthesisUtterance {
   text: string;
+
   lang: string;
+
   volume: number;
+
   rate: number;
+
   pitch: number;
+
   voice: any;
+
   onstart: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+
   onend: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+
   onerror: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisErrorEvent) => any) | null;
+
   onpause: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+
   onresume: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+
   onmark: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+
   onboundary: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => any) | null;
+
   addEventListener: any;
+
   removeEventListener: any;
+
   dispatchEvent: any;
 
   constructor(text: string = '') {
@@ -123,18 +138,31 @@ Object.defineProperty(window, 'speechSynthesis', {
 
 class MockSpeechRecognition {
   start = vi.fn();
+
   stop = vi.fn();
+
   abort = vi.fn();
+
   addEventListener = vi.fn();
+
   removeEventListener = vi.fn();
+
   onresult: any = null;
+
   onerror: any = null;
+
   onstart: any = null;
+
   onend: any = null;
+
   continuous = false;
+
   interimResults = false;
+
   lang = 'en-US';
+
   maxAlternatives = 1;
+
   serviceURI = '';
 }
 
@@ -151,13 +179,21 @@ class MockSpeechRecognition {
  */
 class MockAudioElement {
   src: string = '';
+
   volume: number = 1;
+
   muted: boolean = false;
+
   paused: boolean = true;
+
   currentTime: number = 0;
+
   duration: number = 0;
+
   onended: ((this: HTMLAudioElement, ev: Event) => any) | null = null;
+
   onerror: ((this: HTMLAudioElement, ev: Event) => any) | null = null;
+
   onloadeddata: ((this: HTMLAudioElement, ev: Event) => any) | null = null;
 
   play = vi.fn(() => {
@@ -189,12 +225,19 @@ class MockAudioElement {
 
 class MockMediaRecorder {
   start = vi.fn();
+
   stop = vi.fn();
+
   pause = vi.fn();
+
   resume = vi.fn();
+
   ondataavailable: any = null;
+
   onstop: any = null;
+
   onerror: any = null;
+
   state = 'inactive';
 
   constructor(public stream: any, public options?: any) { }
@@ -272,9 +315,7 @@ if (typeof performance === 'undefined') {
 }
 
 // Mock requestAnimationFrame/cancelAnimationFrame
-(global as any).requestAnimationFrame = vi.fn((cb: FrameRequestCallback) => {
-  return setTimeout(cb, 16) as unknown as number;
-});
+(global as any).requestAnimationFrame = vi.fn((cb: FrameRequestCallback) => setTimeout(cb, 16) as unknown as number);
 
 (global as any).cancelAnimationFrame = vi.fn((id: number) => {
   clearTimeout(id);
@@ -286,11 +327,17 @@ if (typeof performance === 'undefined') {
 
 class MockBlob {
   constructor(public parts: any[], public options?: BlobPropertyBag) { }
+
   size = 0;
+
   type = '';
+
   slice = vi.fn();
+
   stream = vi.fn();
+
   text = vi.fn(() => Promise.resolve(''));
+
   arrayBuffer = vi.fn(() => Promise.resolve(new ArrayBuffer(0)));
 }
 
@@ -302,17 +349,15 @@ class MockBlob {
 // Fetch Mock
 // ============================================================================
 
-(global as any).fetch = vi.fn(() =>
-  Promise.resolve({
-    ok: true,
-    status: 200,
-    json: () => Promise.resolve({}),
-    text: () => Promise.resolve(''),
-    blob: () => Promise.resolve(new MockBlob([])),
-    arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
-    headers: new Headers(),
-  })
-);
+(global as any).fetch = vi.fn(() => Promise.resolve({
+  ok: true,
+  status: 200,
+  json: () => Promise.resolve({}),
+  text: () => Promise.resolve(''),
+  blob: () => Promise.resolve(new MockBlob([])),
+  arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+  headers: new Headers(),
+}));
 
 // ============================================================================
 // IntersectionObserver Mock
@@ -320,11 +365,17 @@ class MockBlob {
 
 class MockIntersectionObserver {
   observe = vi.fn();
+
   unobserve = vi.fn();
+
   disconnect = vi.fn();
+
   takeRecords = vi.fn(() => []);
+
   root = null;
+
   rootMargin = '';
+
   thresholds = [];
 }
 
@@ -336,7 +387,9 @@ class MockIntersectionObserver {
 
 class MockResizeObserver {
   observe = vi.fn();
+
   unobserve = vi.fn();
+
   disconnect = vi.fn();
 }
 

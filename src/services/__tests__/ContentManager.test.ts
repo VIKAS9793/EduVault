@@ -3,7 +3,9 @@
  * MAANG Standards: Test behavior, not implementation
  */
 
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import {
+  vi, describe, it, expect, beforeEach,
+} from 'vitest';
 import { contentManager } from '../ContentManager';
 import { enhancedLessonEngine } from '../EnhancedLessonEngine';
 import { ttsService } from '../TTSService';
@@ -16,13 +18,13 @@ vi.mock('../EnhancedLessonEngine', () => ({
     saveLesson: vi.fn(),
     updateLesson: vi.fn(),
     getLesson: vi.fn(),
-  }
+  },
 }));
 
 vi.mock('../TTSService', () => ({
   ttsService: {
     generateAudioBlob: vi.fn(),
-  }
+  },
 }));
 
 describe('ContentManager', () => {
@@ -74,7 +76,7 @@ describe('ContentManager', () => {
       // Assert
       expect(result).toMatchObject({
         failedSyncs: 1,
-        syncedLessons: 0
+        syncedLessons: 0,
       });
     });
 

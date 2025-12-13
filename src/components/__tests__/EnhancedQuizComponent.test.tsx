@@ -3,8 +3,12 @@
  * MAANG Standards: Test behavior, not implementation
  */
 
-import { render, screen, act, fireEvent, waitFor } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import {
+  render, screen, act, fireEvent, waitFor,
+} from '@testing-library/react';
+import {
+  vi, describe, it, expect, beforeEach, afterEach,
+} from 'vitest';
 import { EnhancedQuizComponent } from '../EnhancedQuizComponent';
 import { LessonFactory } from '../../__tests__/factories/LessonFactory';
 import type { QuizQuestion } from '../../types';
@@ -80,7 +84,7 @@ describe('EnhancedQuizComponent', () => {
           questions={questions}
           lessonId="test-lesson"
           onComplete={mockOnComplete}
-        />
+        />,
       );
 
       expect(screen.getByText(/Question\s*1\s*of\s*3/i)).toBeInTheDocument();
@@ -97,7 +101,7 @@ describe('EnhancedQuizComponent', () => {
           questions={questions}
           lessonId="test-lesson"
           onComplete={mockOnComplete}
-        />
+        />,
       );
 
       // 1. Select option
@@ -123,7 +127,7 @@ describe('EnhancedQuizComponent', () => {
           questions={questions}
           lessonId="test-lesson"
           onComplete={mockOnComplete}
-        />
+        />,
       );
 
       // Advance time in a loop to ensure recursive useEffect timeouts trigger

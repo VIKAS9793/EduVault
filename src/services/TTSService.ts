@@ -62,7 +62,7 @@ class TTSService implements ITTSService {
         resolve();
       };
 
-      utterance.onerror = (event) => {
+      utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
         reject(new Error(`TTS error: ${event.error}`));
       };
 
@@ -173,7 +173,7 @@ class TTSService implements ITTSService {
         mediaRecorder.stop();
       };
 
-      utterance.onerror = (event) => {
+      utterance.onerror = (event: SpeechSynthesisErrorEvent) => {
         reject(new Error(`TTS error: ${event.error}`));
       };
 
