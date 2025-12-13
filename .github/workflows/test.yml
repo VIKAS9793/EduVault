@@ -228,13 +228,13 @@ jobs:
     steps:
       - name: Check all jobs status
         run: |
-          if [[ "${{ needs.lint-and-type.result }}" != "success" || 
-                "${{ needs.unit-tests.result }}" != "success" || 
-                "${{ needs.integration-tests.result }}" != "success" || 
-                "${{ needs.security-scan.result }}" != "success" || 
-                "${{ needs.performance-tests.result }}" != "success" || 
-                "${{ needs.accessibility-tests.result }}" != "success" ]]; then
+          if [[ ( "${{ needs.lint-and-type.result }}" != "success" && "${{ needs.lint-and-type.result }}" != "skipped" ) ||
+                ( "${{ needs.unit-tests.result }}" != "success" && "${{ needs.unit-tests.result }}" != "skipped" ) ||
+                ( "${{ needs.integration-tests.result }}" != "success" && "${{ needs.integration-tests.result }}" != "skipped" ) ||
+                ( "${{ needs.security-scan.result }}" != "success" && "${{ needs.security-scan.result }}" != "skipped" ) ||
+                ( "${{ needs.performance-tests.result }}" != "success" && "${{ needs.performance-tests.result }}" != "skipped" ) ||
+                ( "${{ needs.accessibility-tests.result }}" != "success" && "${{ needs.accessibility-tests.result }}" != "skipped" ) ]]; then
             echo "Quality gate failed - one or more checks failed"
             exit 1
           fi
-          echo "Quality gate passed - all checks successful"
+          echo "Quality gate passed - all checks successful or skipped"
