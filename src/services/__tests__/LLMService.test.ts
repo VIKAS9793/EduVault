@@ -13,7 +13,7 @@ const mockChatCompletionsCreate = vi.fn();
 const mockCreateMLCEngine = vi.fn();
 
 vi.mock('@mlc-ai/web-llm', () => ({
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-return
   CreateMLCEngine: (...args: any[]) => mockCreateMLCEngine(...args),
 }));
 
