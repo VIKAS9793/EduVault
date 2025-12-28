@@ -6,8 +6,22 @@
 
 import type { IASRService, VoiceRecognitionResult, Language } from '../types';
 
+// Define types for Web Speech API since they might not be in the global scope for all environments
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+  message: string;
+}
+
+// We can assume standard SpeechRecognition type definitions exist in modern TS environments or dom lib
+// But if they are missing, we might need to augment the window interface or use a polyfill type.
+// For this fix, we will cast `window` safely.
+
 class ASRService implements IASRService {
-  private recognition: any = null;
+  private recognition: SpeechRecognition | null = null;
 
   private isListening = false;
 
@@ -15,8 +29,8 @@ class ASRService implements IASRService {
 
   constructor() {
     // Check for browser support
-    const SpeechRecognitionAPI = (window as any).SpeechRecognition
-      || (window as any).webkitSpeechRecognition;
+    const SpeechRecognitionAPI = window.SpeechRecognition
+      || (window as unknown as { webkitSpeechRecognition: typeof SpeechRecognition }).webkitSpeechRecognition;
 
     if (SpeechRecognitionAPI) {
       this.recognition = new SpeechRecognitionAPI();
@@ -34,7 +48,7 @@ class ASRService implements IASRService {
     this.recognition.interimResults = true;
     this.recognition.maxAlternatives = 1;
 
-    this.recognition.onresult = (event: any) => {
+    this.recognition.onresult = (event: SpeechRecognitionEvent) => {
       const result = event.results[event.results.length - 1];
       const { transcript } = result[0];
       const { confidence } = result[0];
@@ -46,7 +60,7 @@ class ASRService implements IASRService {
       };
     };
 
-    this.recognition.onerror = (event: any) => {
+    this.recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       console.error('Speech recognition error:', event.error);
       this.isListening = false;
     };

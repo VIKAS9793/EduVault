@@ -8,9 +8,11 @@ import {
 } from 'vitest';
 import type { TTSOptions } from '../../types';
 
+import type { ITTSService } from '../../types';
+
 describe('TTSService', () => {
-  let speakSpy: any;
-  let ttsService: any;
+  let speakSpy: ReturnType<typeof vi.spyOn>;
+  let ttsService: ITTSService;
 
   beforeEach(async () => {
     vi.resetModules();
@@ -58,13 +60,13 @@ describe('TTSService', () => {
 
       volume = 1;
 
-      onend: any = null;
+      onend: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisEvent) => void) | null = null;
 
-      onerror: any = null;
+      onerror: ((this: SpeechSynthesisUtterance, ev: SpeechSynthesisErrorEvent) => void) | null = null;
 
       constructor(text: string) { this.text = text; }
     }
-    (global as any).SpeechSynthesisUtterance = MockUtterance;
+    (global as unknown as { SpeechSynthesisUtterance: typeof MockUtterance }).SpeechSynthesisUtterance = MockUtterance;
 
     // 3. Import Service AFTER mocks
     const module = await import('../TTSService');
