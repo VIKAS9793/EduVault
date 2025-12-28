@@ -1,38 +1,55 @@
 /**
  * Large Language Model Service
  * Interface for offline LLM integration
- * Current implementation provides mock responses with intent to integrate WebLLM or similar
+ * Uses WebLLM for in-browser inference with fallback to rule-based responses
  */
 
+import { CreateMLCEngine, MLCEngineInterface } from '@mlc-ai/web-llm';
 import type { ILLMService, LLMResponse } from '../types';
 
+// Default model to use
+// Using Llama-3-8B-Instruct-q4f32_1-MLC as a standard offline-capable model
+const DEFAULT_MODEL = 'Llama-3-8B-Instruct-q4f32_1-MLC';
+
 class LLMService implements ILLMService {
+  private engine: MLCEngineInterface | null = null;
+
   private initialized = false;
+
+  private initializing = false;
+
+  private modelId: string;
+
+  constructor(modelId: string = DEFAULT_MODEL) {
+    this.modelId = modelId;
+  }
 
   /**
    * Initialize LLM model
-   * TODO: Integrate with WebLLM or similar offline-capable LLM
    */
   async init(): Promise<void> {
-    if (this.initialized) {
+    if (this.initialized || this.initializing) {
       return;
     }
 
-    try {
-      // Placeholder for actual model loading
-      // In production, this would load a quantized model like:
-      // - WebLLM with Llama-2-7B-4bit
-      // - ONNX Runtime Web with quantized GPT
-      // - TensorFlow.js with custom fine-tuned model
+    this.initializing = true;
 
-      await new Promise((resolve) => {
-        setTimeout(resolve, 500);
-      }); // Simulate model loading
+    try {
+      console.log(`Initializing WebLLM with model: ${this.modelId}`);
+
+      this.engine = await CreateMLCEngine(this.modelId, {
+        initProgressCallback: (report) => {
+          console.log('LLM Init:', report.text);
+        },
+      });
 
       this.initialized = true;
+      console.log('WebLLM initialized successfully');
     } catch (error) {
       console.error('LLM initialization failed:', error);
-      throw new Error('Failed to initialize language model');
+      // We keep initialized = false so fallback is used
+    } finally {
+      this.initializing = false;
     }
   }
 
@@ -42,11 +59,39 @@ class LLMService implements ILLMService {
    * @param context - Optional context for better responses
    */
   async process(text: string, context?: string): Promise<LLMResponse> {
-    if (!this.initialized) {
+    // Attempt initialization if not ready
+    if (!this.initialized && !this.initializing) {
       await this.init();
     }
 
-    // Mock implementation - educational assistance responses
+    if (this.initialized && this.engine) {
+      try {
+        const messages = [
+          { role: 'system', content: 'You are a helpful educational assistant.' },
+          ...(context ? [{ role: 'user', content: `Context: ${context}` }] : []),
+          { role: 'user', content: text },
+        ];
+
+        const reply = await this.engine.chat.completions.create({
+          messages: messages as any,
+          temperature: 0.7,
+          max_tokens: 500,
+        });
+
+        const responseText = reply.choices[0]?.message?.content || '';
+        const { usage } = reply;
+
+        return {
+          text: responseText,
+          confidence: 0.95, // High confidence for LLM response
+          tokens: usage?.total_tokens || 0,
+        };
+      } catch (error) {
+        console.error('LLM execution error, falling back to rule-based:', error);
+      }
+    }
+
+    // Fallback implementation - educational assistance responses
     const response = this.generateEducationalResponse(text, context);
 
     return {

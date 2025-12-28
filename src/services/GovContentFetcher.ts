@@ -6,6 +6,7 @@
 
 import axios, { AxiosError } from 'axios';
 import type { Lesson, APIResponse } from '../types';
+import { validateLessons } from '../utils/validation';
 import { enhancedLessonEngine } from './EnhancedLessonEngine';
 
 // Security: Only allow approved government domains
@@ -34,7 +35,14 @@ class GovContentFetcher {
   async fetchLessons(endpoint = '/lessons'): Promise<Lesson[]> {
     try {
       const response = await this.makeRequest<Lesson[]>(endpoint);
-      return response.data ?? [];
+      const data = response.data ?? [];
+
+      const validatedData = validateLessons(data);
+      if (!validatedData) {
+        return [];
+      }
+
+      return validatedData;
     } catch (error) {
       console.error('Failed to fetch lessons from government API:', error);
       return [];
