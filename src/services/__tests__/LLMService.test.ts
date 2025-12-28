@@ -13,6 +13,7 @@ const mockChatCompletionsCreate = vi.fn();
 const mockCreateMLCEngine = vi.fn();
 
 vi.mock('@mlc-ai/web-llm', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   CreateMLCEngine: (...args: any[]) => mockCreateMLCEngine(...args),
 }));
 
@@ -110,19 +111,26 @@ describe('LLMService', () => {
     });
 
     it('should correctly format messages with context', async () => {
-       mockChatCompletionsCreate.mockResolvedValue({
+      mockChatCompletionsCreate.mockResolvedValue({
         choices: [{ message: { content: 'Response' } }],
       });
 
       await llmService.init();
       await llmService.process('Question', 'Lesson Content');
 
-      const callArgs = mockChatCompletionsCreate.mock.calls[0][0];
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+      const callArgs: any = mockChatCompletionsCreate.mock.calls[0][0];
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(callArgs.messages).toHaveLength(3);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(callArgs.messages[0].role).toBe('system');
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(callArgs.messages[1].role).toBe('user');
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(callArgs.messages[1].content).toContain('Context: Lesson Content');
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(callArgs.messages[2].role).toBe('user');
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       expect(callArgs.messages[2].content).toBe('Question');
     });
   });
