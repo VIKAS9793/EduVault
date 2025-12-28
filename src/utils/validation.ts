@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 import type { Lesson } from '../types';
 
 function isObject(value: unknown): value is Record<string, unknown> {
@@ -6,61 +7,71 @@ function isObject(value: unknown): value is Record<string, unknown> {
 
 /**
  * Validates the lesson data structure
+ * Returns only valid lessons, filtering out invalid ones.
  * @param data - The data to validate
- * @returns The validated lessons or null if validation fails
+ * @returns Array of valid lessons (empty if none valid or input invalid)
  */
-export const validateLessons = (data: unknown): Lesson[] | null => {
+export const validateLessons = (data: unknown): Lesson[] => {
   if (!Array.isArray(data)) {
     console.error('Data validation failed: Data is not an array');
-    return null;
+    return [];
   }
 
   const validLessons: Lesson[] = [];
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i += 1) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const item = data[i];
     if (!isObject(item)) {
-      console.error(`Data validation failed: Item at index ${i} is not an object`);
-      return null;
+      console.warn(`Data validation warning: Item at index ${i} is not an object. Skipping.`);
+      continue;
     }
 
     // Validate critical fields
     if (typeof item.id !== 'string') {
-      console.error(`Data validation failed: Item at index ${i} missing or invalid 'id'`);
-      return null;
+      console.warn(`Data validation warning: Item at index ${i} missing or invalid 'id'. Skipping.`);
+      continue;
     }
     if (typeof item.title !== 'string') {
-      console.error(`Data validation failed: Item at index ${i} missing or invalid 'title'`);
-      return null;
+      console.warn(`Data validation warning: Item at index ${i} missing or invalid 'title'. Skipping.`);
+      continue;
     }
     if (typeof item.language !== 'string') {
-      console.error(`Data validation failed: Item at index ${i} missing or invalid 'language'`);
-      return null;
+      console.warn(`Data validation warning: Item at index ${i} missing or invalid 'language'. Skipping.`);
+      continue;
     }
     if (typeof item.subject !== 'string') {
-      console.error(`Data validation failed: Item at index ${i} missing or invalid 'subject'`);
-      return null;
+      console.warn(`Data validation warning: Item at index ${i} missing or invalid 'subject'. Skipping.`);
+      continue;
     }
     if (typeof item.grade !== 'number') {
-      console.error(`Data validation failed: Item at index ${i} missing or invalid 'grade'`);
-      return null;
+      console.warn(`Data validation warning: Item at index ${i} missing or invalid 'grade'. Skipping.`);
+      continue;
     }
     if (typeof item.text_content !== 'string') {
-      console.error(`Data validation failed: Item at index ${i} missing or invalid 'text_content'`);
-      return null;
+      console.warn(`Data validation warning: Item at index ${i} missing or invalid 'text_content'. Skipping.`);
+      continue;
     }
 
     if (!Array.isArray(item.content)) {
-       console.error(`Data validation failed: Item at index ${i} missing or invalid 'content' array`);
-       return null;
+      console.warn(`Data validation warning: Item at index ${i} missing or invalid 'content' array. Skipping.`);
+      continue;
     }
 
-    for (let j = 0; j < item.content.length; j++) {
-      const c = item.content[j];
+    let isContentValid = true;
+    const contentArray = item.content as unknown[];
+
+    for (let j = 0; j < contentArray.length; j += 1) {
+      const c = contentArray[j];
       if (!isObject(c) || typeof c.id !== 'string' || typeof c.type !== 'string' || typeof c.content !== 'string') {
-           console.error(`Data validation failed: Item at index ${i} has invalid content item at index ${j}`);
-           return null;
+        console.warn(`Data validation warning: Item at index ${i} has invalid content item at index ${j}. Skipping lesson.`);
+        isContentValid = false;
+        break;
       }
+    }
+
+    if (!isContentValid) {
+      continue;
     }
 
     // If all checks pass, cast it.
