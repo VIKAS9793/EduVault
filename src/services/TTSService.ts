@@ -155,7 +155,8 @@ class TTSService implements ITTSService {
       }
 
       // Create audio context for recording
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const audioContext = new AudioContextClass();
       const destination = audioContext.createMediaStreamDestination();
       const mediaRecorder = new MediaRecorder(destination.stream);
       const audioChunks: Blob[] = [];

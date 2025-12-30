@@ -40,7 +40,7 @@ describe('ContentManager', () => {
 
       // Spy on the private method via simple property access if possible, OR standard function spy
       // Since it's a private method, we cast to any.
-      vi.spyOn(contentManager as any, 'fetchNCERTContent').mockResolvedValue(mockNCERTContent);
+      vi.spyOn(contentManager as unknown as { fetchNCERTContent: () => Promise<NCERTContent[]> }, 'fetchNCERTContent').mockResolvedValue(mockNCERTContent);
 
       // Mock TTS service
       vi.mocked(ttsService.generateAudioBlob).mockResolvedValue(new Blob(['audio data']));
@@ -65,7 +65,7 @@ describe('ContentManager', () => {
     it('should_handle_sync_failures_gracefully', async () => {
       // Arrange
       const mockNCERTContent = [TestDataFactory.createNCERTContent()];
-      vi.spyOn(contentManager as any, 'fetchNCERTContent').mockResolvedValue(mockNCERTContent);
+      vi.spyOn(contentManager as unknown as { fetchNCERTContent: () => Promise<NCERTContent[]> }, 'fetchNCERTContent').mockResolvedValue(mockNCERTContent);
 
       // Fail save
       vi.mocked(enhancedLessonEngine.saveLesson).mockRejectedValue(new Error('Save failed'));
@@ -86,7 +86,7 @@ describe('ContentManager', () => {
     });
 
     it('should_handle_network_errors_during_fetch', async () => {
-      vi.spyOn(contentManager as any, 'fetchNCERTContent').mockRejectedValue(new Error('Network error'));
+      vi.spyOn(contentManager as unknown as { fetchNCERTContent: () => Promise<NCERTContent[]> }, 'fetchNCERTContent').mockRejectedValue(new Error('Network error'));
 
       await expect(contentManager.syncFromSource('NCERT'))
         .rejects.toThrow('Network error');

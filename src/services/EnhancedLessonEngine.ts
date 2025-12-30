@@ -199,7 +199,7 @@ class EnhancedLessonEngine {
   /**
    * Get engine statistics
    */
-  getStats(): LessonEngineStats & { cacheStats: any } {
+  getStats(): LessonEngineStats & { cacheStats: Record<string, number | string> } {
     return {
       ...this.stats,
       cacheStats: contentCache.getStats(),
