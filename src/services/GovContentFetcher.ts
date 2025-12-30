@@ -8,6 +8,7 @@ import axios, { AxiosError } from 'axios';
 import type { Lesson, APIResponse } from '../types';
 import { validateLessons } from '../utils/validation';
 import { enhancedLessonEngine } from './EnhancedLessonEngine';
+import { logger } from '../utils/logger';
 
 // Security: Only allow approved government domains
 const APPROVED_GOV_APIS = ['https://api.ncert.gov.in', 'https://diksha.gov.in/api'] as const;
@@ -44,7 +45,7 @@ class GovContentFetcher {
 
       return validatedData;
     } catch (error) {
-      console.error('Failed to fetch lessons from government API:', error);
+      logger.error('Failed to fetch lessons from government API:', error);
       return [];
     }
   }
