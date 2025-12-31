@@ -12,7 +12,10 @@ function sanitize(arg: unknown, visited = new WeakSet<object>()): unknown {
     // Basic regex to catch potential secrets in strings (e.g. "Bearer eyJ...")
     // This is a heuristic and not perfect.
     // Redact email-like strings
-    let sanitized = arg.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '[REDACTED_EMAIL]');
+    let sanitized = arg.replace(
+      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g,
+      '[REDACTED_EMAIL]',
+    );
     // Redact Bearer tokens
     sanitized = sanitized.replace(/Bearer\s+[a-zA-Z0-9._-]+/g, 'Bearer [REDACTED_TOKEN]');
     return sanitized;
@@ -36,11 +39,9 @@ function sanitize(arg: unknown, visited = new WeakSet<object>()): unknown {
       stack: sanitize(arg.stack, visited),
     };
     // Include any custom properties
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const errorObj = arg as any;
+    const errorObj = arg as unknown as Record<string, unknown>;
     for (const key of Object.keys(errorObj)) {
       if (key !== 'name' && key !== 'message' && key !== 'stack') {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         sanitizedError[key] = sanitize(errorObj[key], visited);
       }
     }
@@ -63,7 +64,11 @@ function sanitize(arg: unknown, visited = new WeakSet<object>()): unknown {
         if (lowerKey === k) return true;
 
         // 2. Snake_case match: key is surrounded by _ or is at start/end
-        if (lowerKey.includes(`_${k}_`) || lowerKey.startsWith(`${k}_`) || lowerKey.endsWith(`_${k}`)) return true;
+        if (
+          lowerKey.includes(`_${k}_`)
+          || lowerKey.startsWith(`${k}_`)
+          || lowerKey.endsWith(`_${k}`)
+        ) return true;
 
         // 3. CamelCase match: "apiKey" -> "api" + "Key". We can just check if the key contains the sensitive word
         // AND the sensitive word is 'key' (special case) or others.
@@ -78,25 +83,35 @@ function sanitize(arg: unknown, visited = new WeakSet<object>()): unknown {
         if (lowerKey.includes(k)) {
           // If it's "key", be stricter.
           if (k === 'key') {
-             // For 'key', only redact if it's 'apiKey', 'secretKey', 'accessKey', etc.
-             // Or if it stands alone.
-             // "keyboard" -> contains key. "monkey" -> contains key.
-             // "apiKey" -> contains key.
+            // For 'key', only redact if it's 'apiKey', 'secretKey', 'accessKey', etc.
+            // Or if it stands alone.
+            // "keyboard" -> contains key. "monkey" -> contains key.
+            // "apiKey" -> contains key.
 
-             // Check if it's one of the known compound patterns for "key"
-             return lowerKey.includes('api') || lowerKey.includes('secret') || lowerKey.includes('access') || lowerKey.includes('public') || lowerKey.includes('private');
+            // Check if it's one of the known compound patterns for "key"
+            return (
+              lowerKey.includes('api')
+              || lowerKey.includes('secret')
+              || lowerKey.includes('access')
+              || lowerKey.includes('public')
+              || lowerKey.includes('private')
+            );
           }
-           // For other keys like 'password', 'token', 'secret', 'auth', 'credential', 'email'
-           // "author" contains "auth".
-           if (k === 'auth') {
-             return key.toLowerCase() !== 'author' && key.toLowerCase() !== 'authority' && !key.toLowerCase().includes('authenticate');
-             // "authenticate" is probably not sensitive itself? Usually "authentication" or "authToken".
-             // Let's keep it simple: if it equals "auth" or ends with "auth" or starts with "auth" or has "_auth_".
-             // "authToken" -> starts with auth.
-             // "userAuth" -> ends with auth.
-           }
+          // For other keys like 'password', 'token', 'secret', 'auth', 'credential', 'email'
+          // "author" contains "auth".
+          if (k === 'auth') {
+            return (
+              key.toLowerCase() !== 'author'
+              && key.toLowerCase() !== 'authority'
+              && !key.toLowerCase().includes('authenticate')
+            );
+            // "authenticate" is probably not sensitive itself? Usually "authentication" or "authToken".
+            // Let's keep it simple: if it equals "auth" or ends with "auth" or starts with "auth" or has "_auth_".
+            // "authToken" -> starts with auth.
+            // "userAuth" -> ends with auth.
+          }
 
-           return true;
+          return true;
         }
         return false;
       });

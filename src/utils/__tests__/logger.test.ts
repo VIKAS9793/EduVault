@@ -3,15 +3,13 @@ import { vi } from 'vitest';
 
 describe('Logger Utility', () => {
   let consoleLogSpy: any;
-  let consoleWarnSpy: any;
   let consoleErrorSpy: any;
-  let consoleDebugSpy: any;
 
   beforeEach(() => {
     consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-    consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
     consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    consoleDebugSpy = vi.spyOn(console, 'debug').mockImplementation(() => {});
+    vi.spyOn(console, 'debug').mockImplementation(() => {});
 
     // Ensure we are in non-production mode for testing
     vi.stubGlobal('import.meta', { env: { PROD: false } });
