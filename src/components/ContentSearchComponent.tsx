@@ -3,7 +3,9 @@
  * Advanced search and filtering for educational content
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, {
+  useState, useEffect, useMemo, useRef,
+} from 'react';
 import type {
   Lesson, ContentFilters, Language, Subject, Grade, DifficultyLevel,
 } from '../types';
@@ -16,12 +18,34 @@ interface ContentSearchComponentProps {
 export const ContentSearchComponent: React.FC<ContentSearchComponentProps> = ({
   onLessonSelect,
 }) => {
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredLessons, setFilteredLessons] = useState<Lesson[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState<ContentFilters>({});
   const [sortBy, setSortBy] = useState<'title' | 'grade' | 'difficulty' | 'duration'>('title');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+
+  // Keyboard shortcut for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
+      // Focus search on '/' key press if no input is currently focused
+      if (
+        e.key === '/'
+        && !e.ctrlKey
+        && !e.metaKey
+        && !e.altKey
+        && document.activeElement?.tagName !== 'INPUT'
+        && document.activeElement?.tagName !== 'TEXTAREA'
+      ) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Load lessons on component mount
   useEffect(() => {
@@ -148,15 +172,33 @@ export const ContentSearchComponent: React.FC<ContentSearchComponentProps> = ({
       {/* Search Bar */}
       <div className="relative">
         <input
+          ref={searchInputRef}
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search lessons, topics, or keywords..."
-          className="w-full p-4 pl-12 border-2 border-gray-300 rounded-lg focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+          placeholder="Search lessons, topics, or keywords... (Press '/')"
+          aria-label="Search content"
+          className="w-full p-4 pl-12 pr-12 border-2 border-gray-300 rounded-lg focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
         />
         <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
+
+        {searchQuery && (
+          <button
+            type="button"
+            onClick={() => {
+              setSearchQuery('');
+              searchInputRef.current?.focus();
+            }}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-primary-500"
+            aria-label="Clear search"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Filters */}
