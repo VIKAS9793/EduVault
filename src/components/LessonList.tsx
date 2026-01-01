@@ -3,7 +3,7 @@
  * Displays available lessons with filtering and accessibility
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import type { Lesson, Language, Subject } from '../types';
 import { enhancedLessonEngine } from '../services/EnhancedLessonEngine';
 import { useAccessibility } from '../hooks/useAccessibility';
@@ -41,11 +41,13 @@ export const LessonList: React.FC<LessonListProps> = ({
     void loadLessons();
   }, [selectedLanguage, announceToScreenReader]);
 
-  const filteredLessons = filterSubject === 'all'
+  // Optimize filtering to prevent unnecessary recalculations on re-renders
+  const filteredLessons = useMemo(() => (filterSubject === 'all'
     ? lessons
-    : lessons.filter((lesson) => lesson.subject === filterSubject);
+    : lessons.filter((lesson) => lesson.subject === filterSubject)), [filterSubject, lessons]);
 
-  const subjects = Array.from(new Set(lessons.map((l) => l.subject)));
+  // Optimize subject extraction to avoid O(N) operation on every render
+  const subjects = useMemo(() => Array.from(new Set(lessons.map((l) => l.subject))), [lessons]);
 
   if (loading) {
     return (
